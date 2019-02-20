@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/19 23:55:37 by sregnard         ###   ########.fr        #
+#    Updated: 2019/02/20 02:15:42 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ HEADERS					+=	-I $(LIBDIR)$(HEADDIR)
 SRCDIR					=	srcs/
 OBJDIR					=	objs/
 
-SRCNAME					=	common.c \
-							errors.c
+SRCNAME					=	shared.c
 SRC						:=	$(addprefix $(SRCDIR), $(SRCNAME))
 OBJ						=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
