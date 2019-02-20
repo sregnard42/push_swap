@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common.c                                           :+:      :+:    :+:   */
+/*   shared.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 02:00:48 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 02:42:23 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "common.h"
-#include "ft_printf.h"
+#include "shared.h"
+
+void		trigger_error(char *error)
+{
+		if (!error)
+				error = ERR_DEFAULT;
+		write(2, error, ft_strlen(error));
+		exit(EXIT_FAILURE);
+}
 
 void		print_stacks(t_ps p)
 {
+		if (!(p.flags & FLAG_DISPLAY))
+				return ;
 		ft_printf(" ____________ \t ____________ \n");
 		ft_printf("/ %-10s \\\t/ %-10s \\\n", "Stack A", "Stack B");
 		ft_printf("--------------\t--------------\n");
@@ -34,7 +43,7 @@ void		print_stacks(t_ps p)
 		ft_printf("--------------\t--------------\n");
 }
 
-int			duplicate(t_ps p, int nb)
+static int	duplicate(t_ps p, int nb)
 {
 		while(--p.size_a >= 0)
 				if (p.a[p.size_a] == nb)
@@ -42,16 +51,30 @@ int			duplicate(t_ps p, int nb)
 		return (0);
 }
 
+static int	flag(t_ps *p, char *s)
+{
+		if (ft_strequ(s, "-v"))
+				return (p->flags |= FLAG_DISPLAY);
+		if (ft_strequ(s, "-c"))
+				return (p->flags |= FLAG_COLOR);
+		return (0);
+}
+
 void		parse_args(t_ps *p, int ac, char **av)
 {
 		int	nb;
 
-		p->a = (int *)malloc(--ac);
+		if (--ac < 1)
+				trigger_error(NULL);
+		ft_bzero(p, sizeof(p));
+		p->a = (int *)malloc(ac);
 		p->b = (int *)malloc(ac);
 		if (!(p->a && p->b))
 				trigger_error(NULL);
 		while (ac)
-				if (ft_isnumber(av[ac]))
+				if (flag(p, av[ac]))
+						--ac;
+				else if (ft_isnumber(av[ac]))
 				{
 						nb = ft_atoi(av[ac--]);
 						if (duplicate(*p, nb))

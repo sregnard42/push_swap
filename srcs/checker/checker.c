@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 02:03:00 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 03:06:44 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int		operation(t_ps *p, char *s)
 		ft_strequ(s, "rra") ? f = &rev_rotate_a : 0;
 		ft_strequ(s, "rrb") ? f = &rev_rotate_b : 0;
 		ft_strequ(s, "rrr") ? f = &rev_rotate : 0;
+		p->flags & FLAG_DISPLAY ? ft_putendl(s) : 0;
 		if (f)
 				return (f(p));
 		return (0);
@@ -49,16 +50,26 @@ int main(int ac, char **av)
 		char	*input;
 		int		ok;
 
-		if (ac <= 1)
-				trigger_error(NULL);
-		ft_bzero(&p, sizeof(p));
 		parse_args(&p, ac, av);
-		print_stacks(p);
-		while (!(ok = sorted(p)) && get_next_line(1, &input))
+		if (p.flags & FLAG_DISPLAY)
 		{
+				system("clear");
+				ft_putendl("Init a and b");
+		}
+		print_stacks(p);
+		while (!(ok = sorted(p)) && get_next_line(0, &input))
+		{
+				if (p.flags & FLAG_DISPLAY)
+				{
+						sleep(NO_SLEEP);
+						system("clear");
+				}
 				operation(&p, input) ? free(input) : trigger_error(NULL);
 				print_stacks(p);
 		}
-		ok ? ft_putendl("OK") : ft_putendl("KO");
+		if (p.flags & FLAG_COLOR)
+				ok ? ft_putendl("\033[32mOK") : ft_putendl("\033[31mKO");
+		else
+				ok ? ft_putendl("OK") : ft_putendl("KO");
 		return (0);
 }
