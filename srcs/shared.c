@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 02:42:23 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:54:01 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		trigger_error(char *error)
 {
-		if (!error)
+		if (!error || !DEBUG)
 				error = ERR_DEFAULT;
 		write(2, error, ft_strlen(error));
 		exit(EXIT_FAILURE);
@@ -65,23 +65,23 @@ void		parse_args(t_ps *p, int ac, char **av)
 		int	nb;
 
 		if (--ac < 1)
-				trigger_error(NULL);
+				trigger_error("No argument.\n");
 		ft_bzero(p, sizeof(p));
 		p->a = (int *)malloc(ac);
 		p->b = (int *)malloc(ac);
 		if (!(p->a && p->b))
-				trigger_error(NULL);
+				trigger_error("Error malloc.\n");
 		while (ac)
 				if (flag(p, av[ac]))
 						--ac;
-				else if (ft_isnumber(av[ac]))
+				else if (ft_isnumber(av[ac]) && ft_isinteger(av[ac]))
 				{
 						nb = ft_atoi(av[ac--]);
 						if (duplicate(*p, nb))
-								trigger_error(NULL);
+								trigger_error("Duplicate number.\n");
 						else
 								p->a[p->size_a++] = nb;
 				}
 				else
-						trigger_error(NULL);
+						trigger_error("Invalid argument.\n");
 }

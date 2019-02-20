@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 03:06:44 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 10:50:37 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ static int		operation(t_ps *p, char *s)
 		return (0);
 }
 
+static void	print_result(t_ps *p, int ok)
+{
+		if (p->flags & FLAG_COLOR)
+				ok ? ft_putendl("\033[32mOK\033[0m")
+						: ft_putendl("\033[31mKO\033[0m");
+		else
+				ok ? ft_putendl("OK") : ft_putendl("KO");
+		ft_memdel((void **)&p->a);
+		ft_memdel((void **)&p->b);
+}
+
 int main(int ac, char **av)
 {
 		t_ps	p;
@@ -61,15 +72,13 @@ int main(int ac, char **av)
 		{
 				if (p.flags & FLAG_DISPLAY)
 				{
-						sleep(NO_SLEEP);
+						sleep(LONG_SLEEP);
 						system("clear");
 				}
-				operation(&p, input) ? free(input) : trigger_error(NULL);
+				operation(&p, input) ? ft_memdel((void **)&input)
+						: trigger_error(NULL);
 				print_stacks(p);
 		}
-		if (p.flags & FLAG_COLOR)
-				ok ? ft_putendl("\033[32mOK") : ft_putendl("\033[31mKO");
-		else
-				ok ? ft_putendl("OK") : ft_putendl("KO");
-		return (0);
+		print_result(&p, ok);
+		exit(EXIT_SUCCESS);
 }
