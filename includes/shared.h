@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 02:37:51 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:25:54 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "libft.h"
 
-# define ERR_DEFAULT "Error\n"
+# define DEBUG			1
+# define ERR_DEFAULT	"Error\n"
 
 typedef struct	s_ps
 {
