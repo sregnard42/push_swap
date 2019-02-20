@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:49:24 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 02:17:08 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 11:52:46 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_isspace(int c);
 int					ft_isnumber(char *s);
-int					ft_ishexa(char *s);
+int					ft_isinteger(char *s);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
