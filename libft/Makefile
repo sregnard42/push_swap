@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/26 22:10:50 by sregnard         ###   ########.fr        #
+#    Updated: 2019/02/20 00:18:18 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +138,15 @@ SRCNAME		=	ft_mapnew.c \
 				ft_mapfree.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
+SUBDIR		=	ft_printf/
+SRCNAME		=	ft_printf.c \
+				pf_args.c \
+				pf_chars.c \
+				pf_floats.c \
+				pf_numbers.c \
+				pf_utils.c
+SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
 OBJDIR		=	objs/
 OBJ			=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
@@ -151,7 +160,7 @@ $(NAME)		:	$(OBJ)
 
 $(OBJDIR)%.o:	$(SRCDIR)%.c
 	@mkdir -p $(dir $@);
-	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $^
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $^
 
 clean		:
 	rm -rf $(OBJDIR)

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 12:58:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/17 14:01:48 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:25:30 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_list	*ft_lstnew(void *content, size_t content_size)
 	ft_bzero(elem, sizeof(t_list));
 	if (content)
 	{
-		elem->content = content;
+		if (!(elem->content = malloc(content_size)))
+				return (NULL);
+		ft_memcpy(elem->content, content, content_size);
 		elem->content_size = content_size;
 	}
 	elem->prev = NULL;
