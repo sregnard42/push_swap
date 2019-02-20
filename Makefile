@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/20 02:15:42 by sregnard         ###   ########.fr        #
+#    Updated: 2019/02/20 10:26:30 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ OBJ_PUSH				=	$(SRC_PUSH:$(SRCDIR_PUSH)%.c=$(OBJDIR_PUSH)%.o)
 
 CC						=	gcc	
 CFLAGS					=	-Wall -Wextra -Werror
+CFLAGS					+=	-g3
 
 all						:	$(LIBFT) $(CHECKER) $(PUSH_SWAP)
 
