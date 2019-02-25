@@ -6,9 +6,9 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 02:23:04 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/21 13:51:08 by sregnard         ###   ########.fr        #
+#    Updated: 2019/02/25 14:05:43 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#ARG="-1 3 1 -c -v"; ./push_swap $ARG | ./checker $ARG
-ARG="12 11 -1 2 9 10 1 3 6 5 8 -c -v"; ./push_swap $ARG | ./checker $ARG
+#ARG="2 1 3 6 5 8 -c -v"; ./push_swap $ARG | ./checker $ARG
+ARG="5 4 1 3 2 -c -v"; ./push_swap $ARG | ./checker $ARG
