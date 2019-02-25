@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 11:47:24 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 11:53:06 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:05:10 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_isinteger(char *s)
 {
 	long long	nb;
 
-	if (!s)
+	if (!s || !ft_isnumber(s))
 			return (0);
 	nb = 0;
 	while (ft_isspace(*s))
