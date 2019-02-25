@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/20 10:26:30 by sregnard         ###   ########.fr        #
+#    Updated: 2019/02/21 12:47:13 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,13 @@ HEADERS					+=	-I $(LIBDIR)$(HEADDIR)
 SRCDIR					=	srcs/
 OBJDIR					=	objs/
 
-SRCNAME					=	shared.c
+SRCNAME					=	parsing.c \
+							sorted.c \
+							display.c \
+							swap.c \
+							push.c \
+							rotate.c \
+							rev_rotate.c
 SRC						:=	$(addprefix $(SRCDIR), $(SRCNAME))
 OBJ						=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
@@ -31,11 +37,7 @@ DIR_CHECK				=	$(CHECKER)/
 SRCDIR_CHECK			=	$(SRCDIR)$(DIR_CHECK)
 OBJDIR_CHECK			=	$(OBJDIR)$(DIR_CHECK)
 
-SRCNAME					=	checker.c \
-							swap.c \
-							push.c \
-							rotate.c \
-							rev_rotate.c
+SRCNAME					=	checker.c
 SRC_CHECK				:=	$(addprefix $(SRCDIR_CHECK), $(SRCNAME))
 OBJ_CHECK				=	$(SRC_CHECK:$(SRCDIR_CHECK)%.c=$(OBJDIR_CHECK)%.o)
 
@@ -43,7 +45,11 @@ DIR_PUSH				=	$(PUSH_SWAP)/
 SRCDIR_PUSH				=	$(SRCDIR)$(DIR_PUSH)
 OBJDIR_PUSH				=	$(OBJDIR)$(DIR_PUSH)
 
-SRCNAME					=	push_swap.c
+SRCNAME					=	push_swap.c \
+							swap.c \
+							push.c \
+							rotate.c \
+							rev_rotate.c
 SRC_PUSH				:=	$(addprefix $(SRCDIR_PUSH), $(SRCNAME))
 OBJ_PUSH				=	$(SRC_PUSH:$(SRCDIR_PUSH)%.c=$(OBJDIR_PUSH)%.o)
 
