@@ -6,21 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 10:50:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/21 13:03:47 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-
-static int		sorted(t_ps p)
-{
-		if (p.size_b != 0)
-				return (0);
-		while (p.size_a-- > 1)
-				if (p.a[p.size_a] > p.a[p.size_a - 1])
-						return (0);
-		return (1);
-}
 
 static int		operation(t_ps *p, char *s)
 {
@@ -72,7 +62,7 @@ int main(int ac, char **av)
 		{
 				if (p.flags & FLAG_DISPLAY)
 				{
-						sleep(LONG_SLEEP);
+						sleep(SHORT_SLEEP);
 						system("clear");
 				}
 				operation(&p, input) ? ft_memdel((void **)&input)

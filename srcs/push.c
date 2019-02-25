@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/21 13:14:29 by sregnard         ###   ########.fr       */
+/*   Created: 2019/02/19 23:44:26 by sregnard          #+#    #+#             */
+/*   Updated: 2019/02/20 17:37:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "shared.h"
 
-static int	next_move(t_ps *p)
+int		push_a(t_ps *p)
 {
-		if (ps_rotate(p))
+		if (p->size_b == 0)
 				return (1);
-		if (ps_rev_rotate(p))
-				return (1);
-		if (ps_swap(p))
-				return (1);
-		if (ps_push(p))
-				return (1);
-		return (0);
+		ft_swap(p->a + p->size_a++, p->b + --p->size_b);
+		return (1);
 }
 
-int			main(int ac, char **av)
+int		push_b(t_ps *p)
 {
-		t_ps	p;
-		int		ok;
-
-		ok = 1;
-		parse_args(&p, ac, av);
-		while (!sorted(p) && ok)
-				ok = next_move(&p);
+		if (p->size_a == 0)
+				return (1);
+		ft_swap(p->b + p->size_b++, p->a + --p->size_a);
+		return (1);
 }
