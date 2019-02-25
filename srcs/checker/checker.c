@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/21 13:03:47 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/25 16:29:57 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int		operation(t_ps *p, char *s)
 		ft_strequ(s, "rra") ? f = &rev_rotate_a : 0;
 		ft_strequ(s, "rrb") ? f = &rev_rotate_b : 0;
 		ft_strequ(s, "rrr") ? f = &rev_rotate : 0;
-		p->flags & FLAG_DISPLAY ? ft_putendl(s) : 0;
 		if (f)
 				return (f(p));
 		return (0);
@@ -48,26 +47,17 @@ static void	print_result(t_ps *p, int ok)
 int main(int ac, char **av)
 {
 		t_ps	p;
-		char	*input;
+		char	*line;
 		int		ok;
 
 		parse_args(&p, ac, av);
 		if (p.flags & FLAG_DISPLAY)
+				print_stacks(p, "Init A and B", SLP_SHORT);
+		while (!(ok = sorted(p)) && get_next_line(0, &line))
 		{
-				system("clear");
-				ft_putendl("Init a and b");
-		}
-		print_stacks(p);
-		while (!(ok = sorted(p)) && get_next_line(0, &input))
-		{
-				if (p.flags & FLAG_DISPLAY)
-				{
-						sleep(SHORT_SLEEP);
-						system("clear");
-				}
-				operation(&p, input) ? ft_memdel((void **)&input)
-						: trigger_error(NULL);
-				print_stacks(p);
+				!(operation(&p, line)) ? trigger_error(NULL) : 0;
+				p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_SHORT) : 0;
+				ft_memdel((void **)&line);
 		}
 		print_result(&p, ok);
 		exit(EXIT_SUCCESS);

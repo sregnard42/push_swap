@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:44:26 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 14:23:59 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/25 14:57:30 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		push_a(t_ps *p)
 		ft_swap(p->a + p->size_a++, p->b + --p->size_b);
 		p->flags_b = 0;
 		p->flags_a = 0;
+		p->flags_push = 0;
 		p->flags_push |= FLAG_PA;
 		return (1);
 }
@@ -30,6 +31,7 @@ int		push_b(t_ps *p)
 		ft_swap(p->b + p->size_b++, p->a + --p->size_a);
 		p->flags_a = 0;
 		p->flags_b = 0;
+		p->flags_push = 0;
 		p->flags_push |= FLAG_PB;
 		return (1);
 }

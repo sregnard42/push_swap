@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 14:34:00 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/25 16:34:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void		trigger_error(char *error)
 		exit(EXIT_FAILURE);
 }
 
-void		print_stacks(t_ps p)
+void		print_stacks(t_ps p, char *s, int interval)
 {
-		if (!(p.flags & FLAG_DISPLAY))
-				return ;
+		system("clear");
+		ft_putendl(s);
 		ft_printf(" ______________ \t ______________ \n");
 		ft_printf("/ %12s \\\t/ %-12s \\\n", "A", "B");
-		ft_printf(" ______________ \t ______________ \n");
-		ft_printf("| %12d |\t| %-12d |\n", p.size_a, p.size_b);
 		ft_printf("----------------\t----------------\n");
 		--p.size_a;
 		--p.size_b;
@@ -43,4 +41,5 @@ void		print_stacks(t_ps p)
 						ft_printf("| %-12s |\n", "");
 		}
 		ft_printf("----------------\t----------------\n");
+		sleep(interval);
 }
