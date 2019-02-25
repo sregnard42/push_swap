@@ -5,36 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 23:34:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 13:49:29 by sregnard         ###   ########.fr       */
+/*   Created: 2019/02/25 11:59:10 by sregnard          #+#    #+#             */
+/*   Updated: 2019/02/25 12:52:09 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
-int		swap_a(t_ps *p)
+static int	sa(t_ps *p)
 {
-		if (p->size_a < 2 || p->flags_a & FLAG_SA)
+		if (p->size_a < 2)
 				return (0);
-		ft_swap(&p->a[p->size_a - 1], &p->a[p->size_a - 2]);
-		p->flags_push = 0;
-		p->flags_a = 0;
-		p->flags_a |= FLAG_SA;
-		return (1);
+		if (p->a[p->size_a - 1] > p->a[p->size_a - 2])
+				return (swap_a(p));
+		return (0);
 }
 
-int		swap_b(t_ps *p)
+static int	sb(t_ps *p)
 {
-		if (p->size_b < 2 || p->flags_b & FLAG_SB)
+		if (p->size_b < 2)
 				return (0);
-		ft_swap(&p->b[p->size_b - 1], &p->b[p->size_b - 2]);
-		p->flags_push = 0;
-		p->flags_b = 0;
-		p->flags_b |= FLAG_SB;
-		return (1);
+		if (p->b[p->size_b - 1] < p->b[p->size_b - 2])
+				return (swap_b(p));
+		return (0);
 }
 
-int		swap(t_ps *p)
+int			ps_swap(t_ps *p)
 {
-		return (swap_a(p) && swap_b(p));
+		char	*cmd;
+		int		a;
+		int		b;
+
+		cmd = NULL;
+		a = sa(p);
+		b = sb(p);
+		if (a && b)
+				cmd = "ss";
+		else if (a)
+				cmd = "sa";
+		else if (b)
+				cmd = "sb";
+		ft_putendl(cmd);
+		return (cmd != NULL);
 }
+

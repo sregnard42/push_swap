@@ -5,44 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 23:46:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 13:49:43 by sregnard         ###   ########.fr       */
+/*   Created: 2019/02/25 11:57:34 by sregnard          #+#    #+#             */
+/*   Updated: 2019/02/25 13:26:20 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
-int		rev_rotate_a(t_ps *p)
+static int	rra(t_ps *p)
 {
-		int	i;
-
-		if (p->size_a < 2 || p->flags_a & FLAG_RRA)
+		if (p->size_a < 3)
 				return (0);
-		i = 0;
-		while (++i < p->size_a)
-			ft_swap(p->a + i, p->a + i - 1);
-		p->flags_push = 0;
-		p->flags_a = 0;
-		p->flags_a |= FLAG_RRA;
-		return (1);
+		if (p->a[p->size_a - 1] > p->a[0])
+				return (rev_rotate_a(p));
+		return (0);
 }
 
-int		rev_rotate_b(t_ps *p)
+static int	rrb(t_ps *p)
 {
-		int	i;
-
-		if (p->size_b < 2 || p->flags_b & FLAG_RRB)
+		if (p->size_b < 3)
 				return (0);
-		i = 0;
-		while (++i < p->size_b)
-			ft_swap(p->b + i, p->b + i - 1);
-		p->flags_push = 0;
-		p->flags_b = 0;
-		p->flags_b |= FLAG_RRB;
-		return (1);
+		if (p->b[p->size_b - 1] < p->b[0])
+				return (rev_rotate_b(p));
+		return (0);
 }
 
-int		rev_rotate(t_ps *p)
+int			ps_rev_rotate(t_ps *p)
 {
-		return (rev_rotate_a(p) && rev_rotate_b(p));
+		char	*cmd;
+		int		a;
+		int		b;
+
+		cmd = NULL;
+		a = rra(p);
+		b = rrb(p);
+		if (a && b)
+				cmd = "rrr";
+		else if (a)
+				cmd = "rra";
+		else if (b)
+				cmd = "rrb";
+		ft_putendl(cmd);
+		return (cmd != NULL);
 }
