@@ -1,4 +1,3 @@
+*.swp
 *.o
 *.a
-push_swap
-checker
