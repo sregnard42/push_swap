@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 13:48:58 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/25 16:30:16 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ enum			e_flags_b
 
 void			trigger_error(char *error);
 void			parse_args(t_ps *p, int ac, char **av);
-void			print_stacks(t_ps p);
+void			print_stacks(t_ps p, char *s, int interval);
 int				sorted(t_ps p);
 
 int				swap_a(t_ps *p);

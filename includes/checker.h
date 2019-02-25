@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 17:27:57 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 17:29:14 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/02/25 15:53:50 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "shared.h"
 
-# define NO_SLEEP		0
-# define SHORT_SLEEP	1
-# define LONG_SLEEP		2
+# define SLP_NONE		0
+# define SLP_SHORT		1
+# define SLP_LONG		2
 
 #endif
