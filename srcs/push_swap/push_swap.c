@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/04 17:01:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:50:55 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	sort(t_ps *p)
 		int	min;
 		int	pos;
 
-		while (!sorted(*p))
+		while (!sorted(*p, 0))
 		{
 				if ((pos = find_min(p)) == -1)
 						break ;
@@ -48,12 +48,14 @@ static int	sort(t_ps *p)
 				else
 						while (p->a[p->size_a - 1] != min)
 								rev_rotate_a(p);
-				if (sorted(*p))
+				if (sorted(*p, 0))
 						return (1);
+				if (sorted(*p, 'a'))
+						break ;
 				push_b(p);
 		}
-		while (p->size_b)
-				push_a(p);
+		while (p->size_b && push_a(p))
+				;
 		return (1);
 }
 

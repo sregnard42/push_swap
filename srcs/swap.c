@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:34:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:59:22 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:17:49 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		swap_a(t_ps *p)
 				p->flags_ab & FLAG_SS ? 0 : ft_putendl("sa");
 		if (p->size_a < 2 || p->flags_a & FLAG_SA)
 				return (0);
-		ft_swap(&p->a[p->size_a - 1], &p->a[p->size_a - 2]);
+		ft_swap(p->a + p->size_a - 1, p->a + p->size_a - 2);
 		p->flags_push = 0;
 		p->flags_a = 0;
 		p->flags_a |= FLAG_SA;
