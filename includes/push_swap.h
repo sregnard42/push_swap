@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 15:09:20 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 16:25:48 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 # include "libft.h"
 
-# define DEBUG			0
+# define DEBUG			1
 # define ERR_DEFAULT	"Error\n"
+
 # define SLP_NONE		0
 # define SLP_SHORT		1
 # define SLP_LONG		2
+
+# define LINES_LIMIT	42
 
 typedef struct	s_ps
 {
@@ -71,7 +74,7 @@ enum			e_flags_ab
 void			trigger_error(char *error);
 void			parse_args(t_ps *p, int ac, char **av);
 void			print_stacks(t_ps p, char *s, float interval);
-int				sorted(t_ps p);
+int				sorted(t_ps p, char c);
 
 int				swap_a(t_ps *p);
 int				swap_b(t_ps *p);
