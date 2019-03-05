@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/21 12:47:13 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/04 14:08:12 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCDIR_PUSH				=	$(SRCDIR)$(DIR_PUSH)
 OBJDIR_PUSH				=	$(OBJDIR)$(DIR_PUSH)
 
 SRCNAME					=	push_swap.c \
-							swap.c \
+#							swap.c \
 							push.c \
 							rotate.c \
 							rev_rotate.c
