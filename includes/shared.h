@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 16:30:16 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:02:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_ps
 		int		size_b;
 		int		flags_a;
 		int		flags_b;
+		int		flags_ab;
 		int		flags_push;
 		int		flags;
 }				t_ps;
@@ -45,16 +46,23 @@ enum			e_flags_push
 
 enum			e_flags_a
 {
-				FLAG_SA = (1 << 1),
-				FLAG_RA = (1 << 2),
-				FLAG_RRA = (1 << 3),
+				FLAG_SA = (1 << 0),
+				FLAG_RA = (1 << 1),
+				FLAG_RRA = (1 << 2),
 };
 
 enum			e_flags_b
 {
-				FLAG_SB = (1 << 1),
-				FLAG_RB = (1 << 2),
-				FLAG_RRB = (1 << 3),
+				FLAG_SB = (1 << 0),
+				FLAG_RB = (1 << 1),
+				FLAG_RRB = (1 << 2),
+};
+
+enum			e_flags_ab
+{
+				FLAG_SS = (1 << 1),
+				FLAG_RR = (1 << 2),
+				FLAG_RRR = (1 << 3),
 };
 
 void			trigger_error(char *error);
