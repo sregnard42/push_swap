@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shared.h                                           :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:57:00 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:09:20 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define DEBUG			1
+# define DEBUG			0
 # define ERR_DEFAULT	"Error\n"
 # define SLP_NONE		0
 # define SLP_SHORT		1
@@ -70,7 +70,7 @@ enum			e_flags_ab
 
 void			trigger_error(char *error);
 void			parse_args(t_ps *p, int ac, char **av);
-void			print_stacks(t_ps p, char *s, int interval);
+void			print_stacks(t_ps p, char *s, float interval);
 int				sorted(t_ps p);
 
 int				swap_a(t_ps *p);
