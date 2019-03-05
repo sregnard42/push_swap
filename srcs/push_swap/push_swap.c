@@ -6,32 +6,62 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 13:05:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:01:25 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	next_move(t_ps *p)
+static int	find_min(t_ps *p)
 {
-		if (ps_rotate(p))
-				return (1);
-		if (ps_rev_rotate(p))
-				return (1);
-		if (ps_swap(p))
-				return (1);
-		if (ps_push(p))
-				return (1);
-		return (0);
+		int	i;
+		int	min;
+		int	pos;
+
+		if (p->size_a == 0)
+				return (-1);
+		i = p->size_a - 1;
+		min = p->a[i];
+		pos = i;
+		while (i--)
+				if (min > p->a[i])
+				{
+						min = p->a[i];
+						pos = i;
+				}
+		return (pos);
+}
+
+static int	sort(t_ps *p)
+{
+		int	min;
+		int	pos;
+
+		while (!sorted(*p))
+		{
+				if ((pos = find_min(p)) == -1)
+						break ;
+				min = p->a[pos];
+				if ((p->size_a / 2) / (pos + 1) < 2)
+						while (p->a[p->size_a - 1] != min)
+								rotate_a(p);
+				else
+						while (p->a[p->size_a - 1] != min)
+								rev_rotate_a(p);
+				if (sorted(*p))
+						return (1);
+				push_b(p);
+		}
+		while (p->size_b)
+				push_a(p);
+		return (1);
 }
 
 int			main(int ac, char **av)
 {
 		t_ps	p;
-		int		ok;
 
-		ok = 1;
 		parse_args(&p, ac, av);
-		while (!sorted(p) && ok)
-				ok = next_move(&p);
+		p.flags |= FLAG_SOLVER;
+		sort(&p);
 }

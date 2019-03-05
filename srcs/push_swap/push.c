@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:50:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 15:49:49 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/04 15:50:00 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static int	pa(t_ps *p)
 {
 		if (p->size_b < 1 || p->flags_b & FLAG_PB)
 				return (0);
-		if (stack_sorted(p->a, p->size_a, 1)
-						&& stack_sorted(p->b, p->size_b, -1))
-				return (push_a(p));
-		return (0);
+		return (push_a(p));
 }
 
 static int	pb(t_ps *p)
@@ -46,8 +43,6 @@ int	ps_push(t_ps *p)
 				cmd = "pa";
 		else if(pb(p))
 				cmd = "pb";
-		else
-				cmd = "pa";
 		ft_putendl(cmd);
 		return (cmd != NULL);
 }

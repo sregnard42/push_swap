@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:46:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/25 15:18:13 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:06:50 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		rev_rotate_a(t_ps *p)
 {
 		int	i;
 
+		if (p->flags & FLAG_SOLVER)
+				p->flags_ab & FLAG_RRR ? 0 : ft_putendl("rra");
 		if (p->size_a < 2 || p->flags_a & FLAG_RA)
 				return (0);
 		i = 0;
@@ -31,11 +33,14 @@ int		rev_rotate_b(t_ps *p)
 {
 		int	i;
 
+		if (p->flags & FLAG_SOLVER)
+				p->flags_ab & FLAG_RRR ? ft_putendl("rrr") : ft_putendl("rrb");
 		if (p->size_b < 2 || p->flags_b & FLAG_RB)
 				return (0);
 		i = 0;
 		while (++i < p->size_b)
 			ft_swap(p->b + i, p->b + i - 1);
+		p->flags_ab = 0;
 		p->flags_push = 0;
 		p->flags_b = 0;
 		p->flags_b |= FLAG_RRB;
@@ -44,5 +49,6 @@ int		rev_rotate_b(t_ps *p)
 
 int		rev_rotate(t_ps *p)
 {
+		p->flags_ab |= FLAG_RRR;
 		return (rev_rotate_a(p) && rev_rotate_b(p));
 }
