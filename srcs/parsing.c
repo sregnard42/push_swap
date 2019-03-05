@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:35:28 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/04 17:01:10 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:38:37 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void		parse_args(t_ps *p, int ac, char **av)
 {
 		int	nb;
 
-		if (--ac < 1)
+		if (!--ac)
 				trigger_error("No argument.\n");
-		ft_bzero(p, sizeof(p));
-		p->a = (int *)malloc(ac);
-		p->b = (int *)malloc(ac);
+		ft_bzero(p, sizeof(t_ps));
+		p->a = (int *)malloc(ac * sizeof(int));
+		p->b = (int *)malloc(ac * sizeof(int));
 		if (!(p->a && p->b))
 				trigger_error("Error malloc.\n");
-		ft_bzero(p->a, ac);
-		ft_bzero(p->b, ac);
+		ft_bzero(p->a, ac * sizeof(int));
+		ft_bzero(p->b, ac * sizeof(int));
 		while (ac)
 				if (flag(p, av[ac]))
 						--ac;
