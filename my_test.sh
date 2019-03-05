@@ -6,9 +6,15 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 02:23:04 by sregnard          #+#    #+#              #
-#    Updated: 2019/03/04 17:04:02 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/05 14:48:55 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#ARG="5 4 1 3 2 9 6 7 -c -v"; ./push_swap $ARG | ./checker $ARG
-ARG="5 4 1 3 2 9 6 7 -c -v"; ./push_swap $ARG
+#ARG="5 4 1 3 2 -c -v"
+#ARG="5 4 1 3 2 9 6 7 -c -v"
+ARG="5 4 1 3 2 9 6 7 8 10 12 13 15 17 19 18 20 34 27 -c -v"
+
+./push_swap $ARG | ./checker $ARG
+#./push_swap $ARG | wc -l
+#./push_swap $ARG
+#./checker $ARG
