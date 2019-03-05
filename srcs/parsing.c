@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:35:28 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:38:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:59:03 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
 static int	duplicate(t_ps p, int nb)
 {

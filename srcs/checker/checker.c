@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:05:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:03:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static int		operation(t_ps *p, char *s)
 {
@@ -56,7 +56,7 @@ int main(int ac, char **av)
 		while (!(ok = sorted(p)) && get_next_line(0, &line))
 		{
 				!(operation(&p, line)) ? trigger_error(NULL) : 0;
-				p.flags & FLAG_DISPLAY ? print_stacks(p, line, 0) : 0;
+				p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_NONE) : 0;
 				ft_memdel((void **)&line);
 		}
 		print_result(&p, ok);

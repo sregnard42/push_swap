@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:44:26 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:44:46 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:59:41 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
 int		push_a(t_ps *p)
 {

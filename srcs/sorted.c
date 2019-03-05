@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:39:30 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 17:39:48 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:59:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int		sorted(t_ps p)
 {

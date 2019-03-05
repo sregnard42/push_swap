@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:38:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 15:07:44 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
 void		trigger_error(char *error)
 {
@@ -20,23 +20,21 @@ void		trigger_error(char *error)
 		exit(EXIT_FAILURE);
 }
 
-void		print_stacks(t_ps p, char *s, int interval)
+void		print_stacks(t_ps p, char *s, float interval)
 {
 		system("clear");
 		ft_putendl(s);
 		ft_printf(" ______________ \t ______________ \n");
 		ft_printf("/ %12s \\\t/ %-12s \\\n", "A", "B");
 		ft_printf("----------------\t----------------\n");
-		--p.size_a;
-		--p.size_b;
-		while (p.size_a >= 0 || p.size_b >= 0)
+		while (p.size_a || p.size_b)
 		{
-				if (p.size_a >= 0)
-						ft_printf("| %12d |\t", p.a[p.size_a--]);
+				if (p.size_a)
+						ft_printf("| %12d |\t", p.a[--p.size_a]);
 				else
 						ft_printf("| %12s |\t", "");
-				if (p.size_b >= 0)
-						ft_printf("| %-12d |\n", p.b[p.size_b--]);
+				if (p.size_b)
+						ft_printf("| %-12d |\n", p.b[--p.size_b]);
 				else
 						ft_printf("| %-12s |\n", "");
 		}

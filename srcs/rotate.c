@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:45:55 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:24:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:59:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shared.h"
+#include "push_swap.h"
 
 int		rotate_a(t_ps *p)
 {
