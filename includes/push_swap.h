@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/04 17:02:26 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:57:00 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 # define DEBUG			1
 # define ERR_DEFAULT	"Error\n"
+# define SLP_NONE		0
+# define SLP_SHORT		1
+# define SLP_LONG		2
 
 typedef struct	s_ps
 {
