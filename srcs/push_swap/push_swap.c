@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 15:50:55 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/09 14:36:32 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,31 @@ static int	find_min(t_ps *p)
 		return (pos);
 }
 
-static int	sort(t_ps *p)
+static int	sort(t_ps *p, int top, int bottom)
 {
 		int	min;
 		int	pos;
 
+		if (top == bottom)
+				return (1);
 		while (!sorted(*p, 0))
 		{
 				if ((pos = find_min(p)) == -1)
 						break ;
 				min = p->a[pos];
-				if ((p->size_a / 2) / (pos + 1) < 2)
-						while (p->a[p->size_a - 1] != min)
-								rotate_a(p);
-				else
-						while (p->a[p->size_a - 1] != min)
-								rev_rotate_a(p);
+				while (p->a[top] != min)
+				{
+						if (p->a[top - 1] != min && p->a[top] > p->a[top - 1])
+								swap_a(p);
+						((p->size_a / 2) / (pos + 1) < 2) ? rotate_a(p)
+								: rev_rotate_a(p);
+				}
 				if (sorted(*p, 0))
 						return (1);
 				if (sorted(*p, 'a'))
 						break ;
 				push_b(p);
+				--top;
 		}
 		while (p->size_b && push_a(p))
 				;
@@ -65,5 +69,5 @@ int			main(int ac, char **av)
 
 		parse_args(&p, ac, av);
 		p.flags |= FLAG_SOLVER;
-		sort(&p);
+		sort(&p, (p.size_a - 1), 0);
 }
