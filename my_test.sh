@@ -6,14 +6,11 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 02:23:04 by sregnard          #+#    #+#              #
-#    Updated: 2019/03/05 16:29:49 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/09 14:52:54 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#ARG="5 4 1 3 2 -c -v"
-#ARG="5 4 1 3 2 9 6 7 -c -v"
-#ARG="5 4 1 3 2 9 6 7 8 10 12 13 15 17 19 18 20 34 27 -c -v"
-ARG=`ruby -e "puts((1..42).to_a.shuffle.join(' '))"`
+ARG=`ruby -e "puts((1..100).to_a.shuffle.join(' '))"`
 
 ./push_swap $ARG | ./checker $ARG -c -v
 ./push_swap $ARG | wc -l
