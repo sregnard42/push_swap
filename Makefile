@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/03/14 13:11:35 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/16 17:54:38 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCDIR					=	srcs/
 OBJDIR					=	objs/
 
 SRCNAME					=	parsing.c \
-							sorted.c \
+							utils.c \
 							display.c \
 							swap.c \
 							push.c \
