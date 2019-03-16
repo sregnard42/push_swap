@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 16:25:48 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/15 14:02:38 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ int				rotate(t_ps *p);
 int				rev_rotate_a(t_ps *p);
 int				rev_rotate_b(t_ps *p);
 int				rev_rotate(t_ps *p);
+
+int				selection_sort(t_ps *p);
+int				quick_sort(t_ps *p, int start, int end);
 
 #endif
