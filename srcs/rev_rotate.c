@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:46:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 14:59:46 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/16 13:02:08 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		rev_rotate_a(t_ps *p)
 
 		if (p->flags & FLAG_SOLVER)
 				p->flags_ab & FLAG_RRR ? 0 : ft_putendl("rra");
-		if (p->size_a < 2 || p->flags_a & FLAG_RA)
+		if (p->size_a < 2)
 				return (0);
 		i = 0;
 		while (++i < p->size_a)
@@ -35,7 +35,7 @@ int		rev_rotate_b(t_ps *p)
 
 		if (p->flags & FLAG_SOLVER)
 				p->flags_ab & FLAG_RRR ? ft_putendl("rrr") : ft_putendl("rrb");
-		if (p->size_b < 2 || p->flags_b & FLAG_RB)
+		if (p->size_b < 2)
 				return (0);
 		i = 0;
 		while (++i < p->size_b)
