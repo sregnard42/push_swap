@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/03/16 17:54:38 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/20 13:25:25 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ OBJDIR					=	objs/
 SRCNAME					=	parsing.c \
 							utils.c \
 							display.c \
+							operations.c \
 							swap.c \
 							push.c \
 							rotate.c \
@@ -48,6 +49,7 @@ SRCDIR_PUSH				=	$(SRCDIR)$(DIR_PUSH)
 OBJDIR_PUSH				=	$(OBJDIR)$(DIR_PUSH)
 
 SRCNAME					=	push_swap.c \
+							mini_sort.c \
 							selection_sort.c \
 							quick_sort.c
 SRC_PUSH				:=	$(addprefix $(SRCDIR_PUSH), $(SRCNAME))
