@@ -6,12 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/16 18:24:41 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/20 13:20:41 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHARED_H
-# define SHARED_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "libft.h"
 
@@ -24,8 +24,15 @@
 
 # define LINES_LIMIT	42
 
+typedef struct	s_op
+{
+		char	*operations;
+		char	*last_op;
+}				t_op;
+
 typedef struct	s_ps
 {
+		t_op	op;
 		int		*a;
 		int		*b;
 		int		size_a;
@@ -71,29 +78,49 @@ enum			e_flags_ab
 				FLAG_RRR = (1 << 3),
 };
 
-void			trigger_error(char *error);
+/*
+**				parsing.c
+*/
+
 void			parse_args(t_ps *p, int ac, char **av);
+
+/*
+**				display.c
+*/
+
+void			trigger_error(char *error);
 void			print_stacks(t_ps p, char *s, float interval);
+
+/*
+**				utils.c
+*/
+
 int				find_pos(t_ps *p, int val, char c);
+int				get_val(t_ps *p, int pos, char c);
 int				goto_pos(t_ps *p, int pos, char c);
-int				sorted(t_ps p, char c);
+int				sorted(t_ps p, char c, int top, int bottom);
 
-int				swap_a(t_ps *p);
-int				swap_b(t_ps *p);
-int				swap(t_ps *p);
+/*
+**				operations.c
+*/
 
-int				push_a(t_ps *p);
-int				push_b(t_ps *p);
+int				add_operation(t_op *op, char *new_op);
 
-int				rotate_a(t_ps *p);
-int				rotate_b(t_ps *p);
-int				rotate(t_ps *p);
+/*
+**				Allowed operations
+*/
 
-int				rev_rotate_a(t_ps *p);
-int				rev_rotate_b(t_ps *p);
-int				rev_rotate(t_ps *p);
+int				push(t_ps *p, char c);
+int				swap(t_ps *p, char c);
+int				rotate(t_ps *p, char c);
+int				rev_rotate(t_ps *p, char c);
 
+/*
+**				Sorting algorithms
+*/
+
+int				mini_sort(t_ps *p, char c);
 int				selection_sort(t_ps *p);
-int				quick_sort(t_ps *p, int start, int end);
+int				quick_sort(t_ps *p, int top, int bottom);
 
 #endif
