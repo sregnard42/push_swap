@@ -6,18 +6,20 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:45:55 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/16 13:10:33 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/20 13:26:23 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		rotate_a(t_ps *p)
+/*
+**	All elements are shifted up, the top-most element is put at the bottom
+*/
+
+static int	rotate_a(t_ps *p)
 {
 		int	i;
 
-		if (p->flags & FLAG_SOLVER)
-				p->flags_ab & FLAG_RR ? 0 : ft_putendl("ra");
 		if (p->size_a < 2)
 				return (0);
 		i = p->size_a;
@@ -29,12 +31,10 @@ int		rotate_a(t_ps *p)
 		return (1);
 }
 
-int		rotate_b(t_ps *p)
+static int	rotate_b(t_ps *p)
 {
 		int	i;
 
-		if (p->flags & FLAG_SOLVER)
-				p->flags_ab & FLAG_RR ? ft_putendl("rr") : ft_putendl("rb");
 		if (p->size_b < 2)
 				return (0);
 		i = p->size_b;
@@ -47,8 +47,26 @@ int		rotate_b(t_ps *p)
 		return (1);
 }
 
-int		rotate(t_ps *p)
+int			rotate(t_ps *p, char c)
 {
-		p->flags_ab |= FLAG_RR;
-		return (rotate_a(p) && rotate_b(p));
+		int		ret;
+		char	*cmd;
+
+		if (c == 'a')
+		{
+				cmd = "ra";
+				ret = rotate_a(p);
+		}
+		else if (c == 'b')
+		{
+				cmd = "rb";
+				ret = rotate_b(p);
+		}
+		else
+		{
+				cmd = "rr";
+				ret = rotate_a(p) && rotate_b(p);
+		}
+		p->flags & FLAG_SOLVER ? add_operation(&p->op, cmd) : 0;
+		return (ret);
 }

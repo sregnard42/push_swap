@@ -6,30 +6,32 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/16 12:36:04 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/19 16:36:56 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		operation(t_ps *p, char *s)
+static int	operation(t_ps *p, char *s)
 {
-		int (*f)(t_ps *);
+		int		(*f)(t_ps *, char c);
+		char	c;
 
+		c = s[ft_strlen(s) - 1];
 		f = NULL;
-		ft_strequ(s, "sa") ? f = &swap_a : 0;
-		ft_strequ(s, "sb") ? f = &swap_b : 0;
+		ft_strequ(s, "pa") ? f = &push : 0;
+		ft_strequ(s, "pb") ? f = &push : 0;
+		ft_strequ(s, "sa") ? f = &swap : 0;
+		ft_strequ(s, "sb") ? f = &swap : 0;
 		ft_strequ(s, "ss") ? f = &swap : 0;
-		ft_strequ(s, "pa") ? f = &push_a : 0;
-		ft_strequ(s, "pb") ? f = &push_b : 0;
-		ft_strequ(s, "ra") ? f = &rotate_a : 0;
-		ft_strequ(s, "rb") ? f = &rotate_b : 0;
+		ft_strequ(s, "ra") ? f = &rotate : 0;
+		ft_strequ(s, "rb") ? f = &rotate : 0;
 		ft_strequ(s, "rr") ? f = &rotate : 0;
-		ft_strequ(s, "rra") ? f = &rev_rotate_a : 0;
-		ft_strequ(s, "rrb") ? f = &rev_rotate_b : 0;
+		ft_strequ(s, "rra") ? f = &rev_rotate : 0;
+		ft_strequ(s, "rrb") ? f = &rev_rotate : 0;
 		ft_strequ(s, "rrr") ? f = &rev_rotate : 0;
 		if (f)
-				return (f(p));
+				return (f(p, c));
 		return (0);
 }
 
@@ -44,7 +46,7 @@ static void	print_result(t_ps *p, int ok)
 		ft_memdel((void **)&p->b);
 }
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
 		t_ps	p;
 		char	*line;
@@ -53,7 +55,7 @@ int main(int ac, char **av)
 		parse_args(&p, ac, av);
 		if (p.flags & FLAG_DISPLAY)
 				print_stacks(p, "Init A and B", SLP_SHORT);
-		while (!(ok = sorted(p, 0)) && get_next_line(0, &line))
+		while (!(ok = sorted(p, 0, 0, 0)) && get_next_line(0, &line))
 		{
 				!(operation(&p, line)) ? trigger_error(line) : 0;
 				p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_NONE) : 0;

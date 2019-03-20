@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/14 12:50:47 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/20 12:38:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,23 @@ static int	find_min(t_ps *p)
 		return (pos);
 }
 
-int			selection_sort(t_ps *p)
+static int	select_min(t_ps *p, int top)
 {
-		int top;
-		int	min;
 		int	pos;
 
-		top = p->size_a - 1;
-		while (!sorted(*p, 0))
-		{
-				if ((pos = find_min(p)) == -1)
-						break ;
-				min = p->a[pos];
-				while (p->a[top] != min)
-						((p->size_a / 2) / (pos + 1) < 2) ? rotate_a(p)
-								: rev_rotate_a(p);
-				if (sorted(*p, 0))
-						return (1);
-				if (sorted(*p, 'a'))
-						break ;
-				push_b(p);
-				--top;
-		}
-		while (p->size_b && push_a(p))
+		if (sorted(*p, 'a', p->size_a - 1, 0))
+				return (1);
+		pos = find_min(p);
+		if (!(goto_pos(p, pos, 'a')))
+				return (1);
+		push(p, 'b');
+		return (select_min(p, --top));
+}
+
+int			selection_sort(t_ps *p)
+{
+		select_min(p, p->size_a - 1);
+		while (p->size_b && push(p, 'a'))
 				;
 		return (1);
 }

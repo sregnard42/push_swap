@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/05 17:03:14 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/19 13:46:49 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ void		print_stacks(t_ps p, char *s, float interval)
 						ft_printf("  %-12s  \n", "");
 				++lines;
 		}
-		//ft_printf("----------------\t----------------\n");
 		sleep(interval);
 }
