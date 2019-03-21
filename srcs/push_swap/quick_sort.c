@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:34:12 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/19 18:53:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 14:27:29 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		go_back(t_ps *p, int pivot, int p_index)
 				++rot;
 				++rev;
 		}
-		f = get_val(p, p_index - rot, 'a') ? rotate : rev_rotate;
+		f = get_val(p, p_index + rev, 'a') ? rev_rotate : rotate;
 		while (p->a[p_index] != pivot)
 				f(p, 'a');
 		return (1);
@@ -38,11 +38,6 @@ static int		push_back(t_ps *p)
 		{
 				if (p->size_a > 1)
 						rotate(p, 'a');
-				else
-				{
-						push(p, 'b');
-						rev_rotate(p, 'b');
-				}
 				while (p->size_b)
 						push(p, 'a');
 		}
@@ -54,6 +49,8 @@ static int		partition(t_ps *p, int top, int bottom)
 		int		pivot;
 		int		p_index;
 
+		if (sorted(*p, 'a', top, bottom))
+						return (bottom);
 		pivot = p->a[bottom];
 		p_index = bottom;
 		goto_pos(p, top, 'a');

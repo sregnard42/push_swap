@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:46:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/20 13:26:31 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 14:49:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ static int	rev_rotate_a(t_ps *p)
 		i = 0;
 		while (++i < p->size_a)
 				ft_swap(&p->a[i], &p->a[i - 1]);
-		p->flags_push = 0;
-		p->flags_a = 0;
-		p->flags_a |= FLAG_RRA;
 		return (1);
 }
 
@@ -40,9 +37,6 @@ static int	rev_rotate_b(t_ps *p)
 		i = 0;
 		while (++i < p->size_b)
 				ft_swap(&p->b[i], &p->b[i - 1]);
-		p->flags_push = 0;
-		p->flags_b = 0;
-		p->flags_b |= FLAG_RRB;
 		return (1);
 }
 
@@ -66,6 +60,6 @@ int			rev_rotate(t_ps *p, char c)
 				cmd = "rrr";
 				ret = rev_rotate_a(p) && rev_rotate_b(p);
 		}
-		p->flags & FLAG_SOLVER ? add_operation(&p->op, cmd) : 0;
+		p->flags & FLAG_SOLVER ? add_operation(&p->operations, cmd) : 0;
 		return (ret);
 }

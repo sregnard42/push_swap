@@ -6,44 +6,100 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/20 13:32:50 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:22:19 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	replace_last_char(t_op *op, char c)
+int			add_operation(char **operations, char *new_op)
 {
-		char	*p;
-
-		p = op->operations + ft_strlen(op->operations - 2);
-		*p = c;
-		ft_memdel((void **)&op->last_op);
+		*operations = ft_stradd(*operations, new_op);
+		*operations = ft_stradd(*operations, "\n");
 		return (1);
 }
 
-static int	opti_op(t_op *op, char *new_op)
+static int	next(char *op_a, char *op_b)
 {
-		if (!(op->last_op))
+		if (!(op_a && *op_a && op_b && *op_b))
 				return (0);
-		if (ft_strequ(new_op, "sa") || ft_strequ(op->last_op, "sa"))
-				if (ft_strequ(new_op, "sb") || ft_strequ(op->last_op, "sb"))
-						return (replace_last_char(op, 's'));
-		if (ft_strequ(new_op, "ra") || ft_strequ(op->last_op, "ra"))
-				if (ft_strequ(new_op, "rb") || ft_strequ(op->last_op, "rb"))
-						return (replace_last_char(op, 'r'));
-		if (ft_strequ(new_op, "rra") || ft_strequ(op->last_op, "rra"))
-				if (ft_strequ(new_op, "rrb") || ft_strequ(op->last_op, "rrb"))
-						return (replace_last_char(op, 'r'));
+		if (ft_strequ(op_b, "pa") || ft_strequ(op_b, "pb"))
+				return (0);
+		if (ft_strequ(op_a, "sa") || ft_strequ(op_b, "sa"))
+				if (ft_strequ(op_a, "sb") || ft_strequ(op_b, "sb"))
+						return (2);
+		if (ft_strequ(op_a, "ra") || ft_strequ(op_b, "ra"))
+				if (ft_strequ(op_a, "rb") || ft_strequ(op_b, "rb"))
+						return (3);
+		if (ft_strequ(op_a, "rra") || ft_strequ(op_b, "rra"))
+				if (ft_strequ(op_a, "rrb") || ft_strequ(op_b, "rrb"))
+						return (4);
+		return (1);
+}
+
+static int	cancel(char *op_a, char *op_b)
+{
+		if (!(op_a && *op_a && op_b && *op_b))
+				return (0);
+		if (ft_strequ(op_b, "pa") || ft_strequ(op_b, "pb"))
+				return (0);
+		if (ft_strequ(op_a, "rra") || ft_strequ(op_b, "rra"))
+				if (ft_strequ(op_a, "ra") || ft_strequ(op_b, "ra"))
+						return (1);
+		if (ft_strequ(op_a, "rrb") || ft_strequ(op_b, "rrb"))
+				if (ft_strequ(op_a, "rb") || ft_strequ(op_b, "rb"))
+						return (1);
+		if (ft_strequ(op_a, "sa") && ft_strequ(op_b, "sa"))
+				return (1);
+		if (ft_strequ(op_a, "sb") && ft_strequ(op_b, "sb"))
+				return (1);
 		return (0);
 }
 
-int			add_operation(t_op *op, char *new_op)
+static int	opti_op(char **op)
 {
-		if (opti_op(op, new_op))
+		char	*op_a;
+		char	*op_b;
+		int		ret;
+
+		if (ft_strequ(*op, "pa") || ft_strequ(*op, "pb"))
+				return (0);
+		op_a = *(op - 1);
+		op_b = *op;
+		if (cancel(op_a, op_b))
+		{
+				ft_remove_elem_tab(op - 1);
+				ft_remove_elem_tab(op - 1);
 				return (1);
-		op->last_op = new_op;
-		op->operations = ft_stradd(op->operations, new_op);
-		op->operations = ft_stradd(op->operations, "\n");
+		}
+		while ((ret = next(op_a, op_b)) == 1)
+				++op_b;
+		if (ret == 0)
+				return (0);
+		ft_strclr(op_b);
+		if (ret == 2)
+				op_a = "ss";
+		if (ret == 3)
+				op_a = "rr";
+		if (ret == 4)
+				op_a = "rrr";
 		return (1);
 }
+
+char	**opti_operations(char **operations)
+{
+		char	**op;
+		int		i;
+
+		if (!ft_strlen(*operations))
+				return (NULL);
+		if (!(op = ft_strsplit(*operations, '\n')))
+				return (NULL);
+		if (ft_nb_str_tab(op) < 2)
+				return (op);
+		i = 1;
+		while (op + i && op[i])
+				opti_op(op + i++);
+		return (op);
+}
+

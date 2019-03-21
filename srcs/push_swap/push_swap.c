@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/20 13:26:56 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:24:31 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int			main(int ac, char **av)
 
 		parse_args(&p, ac, av);
 		p.flags |= FLAG_SOLVER;
-		p.op.operations = NULL;
-		p.op.last_op = NULL;
+		p.operations = NULL;
 		if (sorted(p, 0, p.size_a - 1, 0))
 						exit(EXIT_SUCCESS);
 		if (p.size_a <= 3)
@@ -28,6 +27,6 @@ int			main(int ac, char **av)
 			selection_sort(&p);
 		else
 			quick_sort(&p, p.size_a - 1, 0);
-		ft_putstr(p.op.operations);
+		ft_print_tab(opti_operations(&p.operations));
 		exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:39:30 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/20 12:35:19 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 13:55:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,26 @@ int		goto_pos(t_ps *p, int pos, char c)
 		size = c == 'a' ? p->size_a : p->size_b;
 		top = size - 1;
 		val = tab[pos];
-		f = ((size / 2) / (pos + 1) < 2) ? rotate : rev_rotate;
+		f = rotate_function(p, pos, c);
 		while (tab[top] != val)
-		{
-				if (sorted(*p, c, top, 0))
-						return (0);
 				f(p, c);
-		}
 		return (1);
+}
+
+int (*rotate_function(t_ps *p, int pos, char c))(t_ps *, char)
+{
+		int		*tab;
+		int		size;
+		int		top;
+		int		val;
+		int		(*f)(t_ps *, char);
+
+		tab = c == 'a' ? p->a : p->b;
+		size = c == 'a' ? p->size_a : p->size_b;
+		top = size - 1;
+		val = tab[pos];
+		f = ((size / 2) / (pos + 1) < 2) ? rotate : rev_rotate;
+		return (f);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/20 12:38:39 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 13:58:54 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,20 @@ static int	find_min(t_ps *p)
 static int	select_min(t_ps *p, int top)
 {
 		int	pos;
+		int	min;
+		int	(*f)(t_ps *, char);
 
 		if (sorted(*p, 'a', p->size_a - 1, 0))
 				return (1);
 		pos = find_min(p);
-		if (!(goto_pos(p, pos, 'a')))
-				return (1);
+		min = p->a[pos];
+		f = (rotate_function(p, pos, 'a'));
+		while (p->a[p->size_a - 1] != min)
+		{
+				if (sorted(*p, 'a', p->size_a - 1, 0))
+						break ;
+				f(p, 'a');
+		}
 		push(p, 'b');
 		return (select_min(p, --top));
 }
