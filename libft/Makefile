@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/02/20 11:52:39 by sregnard         ###   ########.fr        #
+#    Updated: 2019/03/21 16:21:57 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,7 @@ SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 SUBDIR		=	tab2d/
 SRCNAME		=	ft_print_tab.c \
 				ft_free_tab.c \
+				ft_remove_elem_tab.c \
 				ft_nb_str_tab.c \
 				ft_max_strlen_tab.c \
 				ft_atoi_tab.c

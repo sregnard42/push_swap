@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:49:24 by sregnard          #+#    #+#             */
-/*   Updated: 2019/02/20 11:52:46 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/03/21 16:21:21 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int					ft_factorial(unsigned int n);
 
 void				ft_print_tab(char **tab);
 void				ft_free_tab(char ***ptr_tab);
+void				ft_remove_elem_tab(char **tab);
 int					ft_nb_str_tab(char **tab);
 int					ft_max_strlen_tab(char **tab);
 int					*ft_atoi_tab(char **tab, int size);
