@@ -26,20 +26,22 @@
 
 typedef struct	s_ps
 {
-		char	*operations;
-		int		*a;
-		int		*b;
-		int		size_a;
-		int		size_b;
-		int		flags;
+	char		*operations;
+	int			*a;
+	int			*b;
+	int			size_a;
+	int			size_b;
+	int			flags;
 }				t_ps;
 
 enum			e_flags
 {
-				FLAG_DISPLAY = (1 << 0),
-				FLAG_COLOR = (1 << 1),
-				FLAG_SOLVER = (1 << 2),
+	FLAG_DISPLAY = (1 << 0),
+	FLAG_COLOR = (1 << 1),
+	FLAG_SOLVER = (1 << 2),
 };
+
+typedef int		(*t_rotf)(t_ps *, char);
 
 /*
 **				parsing.c
@@ -61,7 +63,7 @@ void			print_stacks(t_ps p, char *s, float interval);
 int				find_pos(t_ps *p, int val, char c);
 int				get_val(t_ps *p, int pos, char c);
 int				goto_pos(t_ps *p, int pos, char c);
-int				(*rotate_function(t_ps *p, int pos, char c))(t_ps *p, char);
+t_rotf			rotate_function(t_ps *p, int pos, char c);
 int				sorted(t_ps p, char c, int top, int bottom);
 
 /*
