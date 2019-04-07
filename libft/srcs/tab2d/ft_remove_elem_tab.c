@@ -6,18 +6,18 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 16:13:24 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/21 16:22:52 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/04/07 13:45:27 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_remove_elem_tab(char **tab)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (tab + i && tab[i])
-		{
-				tab[i] = tab[i + 1];
-				++i;
-		}
+	i = 0;
+	while (tab + i && tab[i])
+	{
+		tab[i] = tab[i + 1];
+		++i;
+	}
 }

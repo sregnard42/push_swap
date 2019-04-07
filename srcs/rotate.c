@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:45:55 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/21 14:49:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/04/07 10:44:48 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,48 +18,48 @@
 
 static int	rotate_a(t_ps *p)
 {
-		int	i;
+	int	i;
 
-		if (p->size_a < 2)
-				return (0);
-		i = p->size_a;
-		while (--i > 0)
-			ft_swap(&p->a[i], &p->a[i - 1]);
-		return (1);
+	if (p->size_a < 2)
+		return (0);
+	i = p->size_a;
+	while (--i > 0)
+		ft_swap(&p->a[i], &p->a[i - 1]);
+	return (1);
 }
 
 static int	rotate_b(t_ps *p)
 {
-		int	i;
+	int	i;
 
-		if (p->size_b < 2)
-				return (0);
-		i = p->size_b;
-		while (--i > 0)
-			ft_swap(&p->b[i], &p->b[i - 1]);
-		return (1);
+	if (p->size_b < 2)
+		return (0);
+	i = p->size_b;
+	while (--i > 0)
+		ft_swap(&p->b[i], &p->b[i - 1]);
+	return (1);
 }
 
 int			rotate(t_ps *p, char c)
 {
-		int		ret;
-		char	*cmd;
+	int		ret;
+	char	*cmd;
 
-		if (c == 'a')
-		{
-				cmd = "ra";
-				ret = rotate_a(p);
-		}
-		else if (c == 'b')
-		{
-				cmd = "rb";
-				ret = rotate_b(p);
-		}
-		else
-		{
-				cmd = "rr";
-				ret = rotate_a(p) && rotate_b(p);
-		}
-		p->flags & FLAG_SOLVER ? add_operation(&p->operations, cmd) : 0;
-		return (ret);
+	if (c == 'a')
+	{
+		cmd = "ra";
+		ret = rotate_a(p);
+	}
+	else if (c == 'b')
+	{
+		cmd = "rb";
+		ret = rotate_b(p);
+	}
+	else
+	{
+		cmd = "rr";
+		ret = rotate_a(p) && rotate_b(p);
+	}
+	p->flags & FLAG_SOLVER ? add_operation(&p->operations, cmd) : 0;
+	return (ret);
 }
