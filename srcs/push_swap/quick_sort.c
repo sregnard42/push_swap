@@ -12,6 +12,18 @@
 
 #include "push_swap.h"
 
+static int		push_back(t_ps *p)
+{
+	if (p->size_b)
+	{
+		if (p->size_a > 1)
+			rotate(p, 'a');
+		while (p->size_b)
+			push(p, 'a');
+	}
+	return (1);
+}
+
 static int		go_back(t_ps *p, int pivot, int p_index)
 {
 	int		(*f)(t_ps *, char c);
@@ -31,18 +43,6 @@ static int		go_back(t_ps *p, int pivot, int p_index)
 	while (p->a[p_index] != pivot)
 		f(p, 'a');
 	return (p_index);
-}
-
-static int		push_back(t_ps *p)
-{
-	if (p->size_b)
-	{
-		if (p->size_a > 1)
-			rotate(p, 'a');
-		while (p->size_b)
-			push(p, 'a');
-	}
-	return (1);
 }
 
 static int		partition(t_ps *p, int top, int bottom)
