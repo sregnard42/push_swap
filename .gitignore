@@ -1,3 +1,6 @@
 *.swp
 *.o
 *.a
+/checker
+/push_swap
+result_histo
