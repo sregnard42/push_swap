@@ -14,10 +14,9 @@
 
 /*
 **	Find the smallest number in the list
-**	Or the second smallest
 */
 
-static int	find_min(t_ps *p, short int need_second, int exclude)
+static int	find_min(t_ps *p)
 {
 	int	i;
 	int	min;
@@ -31,38 +30,9 @@ static int	find_min(t_ps *p, short int need_second, int exclude)
 	while (i--)
 		if (min > p->a[i])
 		{
-			if (!(need_second && p->a[i] == exclude))
-			{
-				min = p->a[i];
-				pos = i;
-			}
+			min = p->a[i];
+			pos = i;
 		}
-	return (pos);
-}
-
-static int	distance(t_ps *p, int pos)
-{
-	int	top;
-	int	bottom;
-	int distance;
-
-	top = p->size_a - 1;
-	bottom = 1;
-	distance = top - pos < bottom + pos ? top - pos : bottom + pos;
-	return (distance);
-}
-
-static int	find_next(t_ps *p)
-{
-	int	pos;
-	int	pos2;
-
-	pos = find_min(p, 0, 0);
-	if (p->a[pos] < p->b[p->size_b - 1])
-		return (pos);
-	pos2 = find_min(p, 1, p->a[pos]);
-	pos = distance(p, pos) < distance(p, pos2) ? distance(p, pos)
-	: distance(p, pos2);
 	return (pos);
 }
 
@@ -74,7 +44,7 @@ static int	push_min(t_ps *p, int top)
 
 	if (sorted(*p, 'a', p->size_a - 1, 0))
 		return (1);
-	pos = find_next(p);
+	pos = find_min(p);
 	min = p->a[pos];
 	f = (rotate_function(p, pos, 'a'));
 	while (p->a[p->size_a - 1] != min)
