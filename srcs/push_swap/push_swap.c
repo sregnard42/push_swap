@@ -24,7 +24,9 @@ int	main(int ac, char **av)
 	if (p.size_a <= 3)
 		mini_sort(&p, 'a');
 	else
-		selection_sort(&p);
+		insertion_sort(&p);
+		//selection_sort(&p);
+		//quick_sort(&p, p.size_a - 1, 0);
 	ft_print_tab(opti_operations(&p.operations));
 	exit(EXIT_SUCCESS);
 }
