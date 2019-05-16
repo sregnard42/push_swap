@@ -88,6 +88,7 @@ int				rev_rotate(t_ps *p, char c);
 
 int				mini_sort(t_ps *p, char c);
 int				selection_sort(t_ps *p);
+int				insertion_sort(t_ps *p);
 int				quick_sort(t_ps *p, int top, int bottom);
 
 #endif
