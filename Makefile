@@ -51,6 +51,7 @@ OBJDIR_PUSH				=	$(OBJDIR)$(DIR_PUSH)
 SRCNAME					=	push_swap.c \
 							mini_sort.c \
 							selection_sort.c \
+							insertion_sort.c \
 							quick_sort.c
 SRC_PUSH				:=	$(addprefix $(SRCDIR_PUSH), $(SRCNAME))
 OBJ_PUSH				=	$(SRC_PUSH:$(SRCDIR_PUSH)%.c=$(OBJDIR_PUSH)%.o)
