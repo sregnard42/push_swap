@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/03/21 15:26:50 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/17 21:24:18 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				sorted(t_ps p, char c, int top, int bottom);
 */
 
 int				add_operation(char **operations, char *new_op);
-char			**opti_operations(char **operations);
+char			**opti_operations(char *operations);
 
 /*
 **				Allowed operations
