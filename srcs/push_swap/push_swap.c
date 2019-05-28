@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/17 21:24:55 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:28:33 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	main(int ac, char **av)
 		exit(EXIT_SUCCESS);
 	if (p.size_a <= 3)
 		mini_sort(&p, 'a');
-	else
+	else if (p.size_a <= 5)
 		insertion_sort(&p);
+	else
 		//selection_sort(&p);
-		//quick_sort(&p, p.size_a - 1, 0);
+		quick_sort(&p, p.size_a - 1, 0);
 	ft_print_tab(opti_operations(p.operations));
-//	ft_putstr(p.operations);	
 	exit(EXIT_SUCCESS);
 }

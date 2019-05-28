@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:44:26 by sregnard          #+#    #+#             */
-/*   Updated: 2019/04/07 10:44:41 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:30:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	push_a(t_ps *p)
 {
 	if (p->size_b < 1)
-		return (0);
+		return (1);
 	ft_swap(&p->a[p->size_a++], &p->b[--p->size_b]);
 	return (1);
 }
@@ -23,7 +23,7 @@ static int	push_a(t_ps *p)
 static int	push_b(t_ps *p)
 {
 	if (p->size_a < 1)
-		return (0);
+		return (1);
 	ft_swap(&p->b[p->size_b++], &p->a[--p->size_a]);
 	return (1);
 }

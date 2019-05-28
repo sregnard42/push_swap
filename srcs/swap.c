@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:34:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/04/07 10:44:51 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:31:01 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	swap_a(t_ps *p)
 {
 	if (p->size_a < 2)
-		return (0);
+		return (1);
 	ft_swap(p->a + p->size_a - 1, p->a + p->size_a - 2);
 	return (1);
 }
@@ -23,7 +23,7 @@ static int	swap_a(t_ps *p)
 static int	swap_b(t_ps *p)
 {
 	if (p->size_b < 2)
-		return (0);
+		return (1);
 	ft_swap(&p->b[p->size_b - 1], &p->b[p->size_b - 2]);
 	return (1);
 }
