@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:34:12 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/28 20:58:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/29 11:55:49 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,35 @@
 
 static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
 {
-		int		d;
-		int		pivot;
+	int		d;
+	int		pivot;
 
-		d = (c == 'a') ? 1 : -1;
-		pivot = (c == 'a') ? p->a[bottom] : p->b[bottom];
-		rev_rotate(p, c);
-		push(p, c);
-		--top;
-		return (1);
+	d = (c == 'a') ? 1 : -1;
+	pivot = (c == 'a') ? p->a[bottom] : p->b[bottom];
+	rev_rotate(p, c);
+	push(p, c);
+	--top;
+	return (1);
 }	
 
 int				quick_sort(t_ps *p, int top, int bottom)
 {
-		int		pivot;
+	int		pivot;
 
-		pivot = p->a[bottom];
-		while (p->a[top] != pivot)
+	pivot = p->a[bottom];
+	while (p->a[top] != pivot)
+	{
+		if (p->a[top] < pivot)
 		{
-				if (p->a[top] < pivot)
-				{
-						push(p, 'b');
-						--top;
-				}
-				else
-						rotate(p, 'a');
+			push(p, 'b');
+			--top;
 		}
-		if (p->size_a <= 3)
-				mini_sort(p, 'a');
 		else
-				quick_sort_stack(p, 'a', p->size_a - 1, 0); 
-		if (p->size_b <= 3)
-				mini_sort(p, 'b');
-		else
-				quick_sort_stack(p, 'b', p->size_b - 1, 0); 
-		//while (p->size_b)
-		//		push(p, 'a');
-		return (1);
+			rotate(p, 'a');
+	}
+	quick_sort_stack(p, 'a', p->size_a - 1, 0); 
+	quick_sort_stack(p, 'b', p->size_b - 1, 0); 
+	//while (p->size_b)
+	//		push(p, 'a');
+	return (1);
 }
