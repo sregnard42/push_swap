@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:39:30 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/29 15:29:14 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:54:23 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int		goto_pos(t_ps *p, int pos, char c)
 		f(p, c);
 	return (1);
 }
+
+/*
+**		Determine whether rotate or rev rotate is the most
+**		optimal to reach the desired position in the list
+*/
 
 t_rotf	rotate_function(t_ps *p, int pos, char c)
 {

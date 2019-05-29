@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:42:58 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/29 15:32:18 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:47:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
 
 	tab = (c == 'a') ? p->a : p->b;
 	size = (c == 'a') ? p->size_a : p->size_b;
-	if (size <= 1)
+	if (top - bottom <= 3)
 		return (1);
 	pivot = find_median(tab[top], tab[bottom], tab[top / 2]);
 	nb_pushed = 0;
@@ -87,6 +87,7 @@ static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
 	goto_pos(p, find_pos(p, pivot, c) + 1, c);
 	while (nb_pushed--)
 		push(p, c);
+	rev_rotate(p, c);
 	quick_sort_stack(p, c, top, find_pos(p, pivot, c) + 1);
 	quick_sort_stack(p, c, find_pos(p, pivot, c) - 1, bottom);
 	return (1);
