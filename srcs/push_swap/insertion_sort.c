@@ -6,14 +6,14 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:41:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/17 22:19:06 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/30 13:34:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
- ** Find the max value that is inferior to the given cap
+ ** Find the max value that is inferior to the given value
  */
 
 static int find_max_capped(t_ps *p, char c, int cap)
@@ -94,11 +94,11 @@ static int insert_nb(t_ps *p, int nb)
 		int min;
 		int max;
 		int	target;
-		int	i;
 
-		i = p->size_b;
-		if (i < 2)
+		if (p->size_b < 3 || p->size_a + p->size_b <= 6)
 				return push(p, 'b');
+		if (p->size_b == 3)
+			mini_sort(p, 'b');
 		min = find_min(p, 'b');
 		max = find_max(p, 'b');
 		if (nb < p->b[min] || nb > p->b[max])
@@ -130,7 +130,10 @@ int insertion_sort(t_ps *p)
 				insert_nb(p, p->a[p->size_a - 1]);
 		}
 		mini_sort(p, 'a');
-		goto_pos(p, find_max(p, 'b'), 'b');
+		if (p->size_b <= 3)
+			mini_sort(p, 'b');
+		else
+			goto_pos(p, find_max(p, 'b'), 'b');
 		while (p->size_b)
 				push(p, 'a');
 		goto_pos(p, find_min(p, 'a'), 'a');

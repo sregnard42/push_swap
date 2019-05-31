@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:42:58 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/29 15:47:39 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:22:38 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,23 @@ static int		find_median(int a, int b, int c)
 		else
 			med = min;
 	}
-	ft_printf("a = %d\tb = %d\tc = %d\tmed = %d\n", a, b, c, med);
 	return (med);
 }
 
 static int		find_target(t_ps *p, char c, int pivot)
 {
+	t_stack	s;
 	int		index;
-	int		*tab;
 	int		d;
-	int		i;
 
-	index = -1;
-	tab = (c == 'a') ? p->a : p->b;
+	s.tab = (c == 'a') ? p->a : p->b;
+	s.size = (c == 'a') ? p->size_a : p->size_b;
 	d = (c == 'a') ? 1 : -1;
-	i = (c == 'a') ? p->size_a : p->size_b ;
-	while (i--)
-		if (tab[i] < pivot * d)
+	index = -1;
+	while (s.size--)
+		if (s.tab[s.size] * d < pivot * d)
 		{
-			index = i;
+			index = s.size;
 			break ;
 		}
 	return (index);
@@ -63,18 +61,17 @@ static int		find_target(t_ps *p, char c, int pivot)
 
 static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
 {
-	int		*tab;
-	int		size;
+	t_stack	s;
 	int		pivot;
 	int		pos;
 	int		nb_pushed;
 
-	tab = (c == 'a') ? p->a : p->b;
-	size = (c == 'a') ? p->size_a : p->size_b;
-	if (top - bottom <= 3)
+	s.tab = (c == 'a') ? p->a : p->b;
+	s.size = (c == 'a') ? p->size_a : p->size_b;
+	if (top - bottom <= 1 || sorted(*p, c, top, bottom))
 		return (1);
-	pivot = find_median(tab[top], tab[bottom], tab[top / 2]);
 	nb_pushed = 0;
+	pivot = find_median(s.tab[top], s.tab[bottom], s.tab[(top - bottom)/ 2]);
 	while ((pos = find_target(p, c, pivot)) != -1)
 	{
 		goto_pos(p, pos, c); 
@@ -84,12 +81,12 @@ static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
 			push(p, 'a');
 		++nb_pushed;
 	}
-	goto_pos(p, find_pos(p, pivot, c) + 1, c);
+	pos = find_pos(p, pivot, c);
+	goto_pos(p, pos, c);
 	while (nb_pushed--)
 		push(p, c);
-	rev_rotate(p, c);
-	quick_sort_stack(p, c, top, find_pos(p, pivot, c) + 1);
-	quick_sort_stack(p, c, find_pos(p, pivot, c) - 1, bottom);
+	quick_sort_stack(p, c, top, pos + 1);
+	quick_sort_stack(p, c, pos - 1, bottom);
 	return (1);
 }	
 
@@ -104,7 +101,6 @@ int				quick_sort(t_ps *p, int top, int bottom)
 		goto_pos(p, pos, 'a'); 
 		push(p, 'b');
 	}
-	//goto_pos(p, find_pos(p, pivot, 'a'), 'a');
 	if (p->size_a <= 3)
 		mini_sort(p, 'a');
 	else
@@ -113,8 +109,7 @@ int				quick_sort(t_ps *p, int top, int bottom)
 		mini_sort(p, 'b');
 	else
 		quick_sort_stack(p, 'b', p->size_b - 1, 0); 
-	print_stacks(*p, 0, 0);
-	//while (p->size_b)
-	//		push(p, 'a');
+	while (p->size_b)
+			push(p, 'a');
 	return (1);
 }
