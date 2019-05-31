@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/17 21:24:18 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/30 14:02:58 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct	s_ps
 	int			size_b;
 	int			flags;
 }				t_ps;
+
+typedef struct	s_stack
+{
+	int			*tab;
+	int			size;
+}				t_stack;
 
 enum			e_flags
 {
