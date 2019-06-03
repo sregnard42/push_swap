@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/30 16:33:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/31 15:02:12 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static int	push_all(t_ps *p, int top)
 int			selection_sort(t_ps *p)
 {
 	push_all(p, p->size_a - 1);
+	goto_pos(p, find_max(p, 'b'), 'b');
 	while (p->size_b && push(p, 'a'))
 		;
-	goto_pos(p, find_min(p), 'a');
 	return (1);
 }

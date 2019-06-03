@@ -5,111 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 14:42:58 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/30 15:22:38 by sregnard         ###   ########.fr       */
+/*   Created: 2019/03/14 11:34:12 by sregnard          #+#    #+#             */
+/*   Updated: 2019/04/07 10:33:14 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		find_median(int a, int b, int c)
+static int		push_back(t_ps *p)
 {
-	int		min;
-	int		max;
-	int		med;
-
-	if (a < b)
+	if (p->size_b)
 	{
-		min = a;
-		max = b;
-	}
-	else
-	{
-		min = b;
-		max = a;
-	}
-	if (max < c)
-		med = max;
-	else
-	{
-		if (c > min)
-			med = c;
-		else
-			med = min;
-	}
-	return (med);
-}
-
-static int		find_target(t_ps *p, char c, int pivot)
-{
-	t_stack	s;
-	int		index;
-	int		d;
-
-	s.tab = (c == 'a') ? p->a : p->b;
-	s.size = (c == 'a') ? p->size_a : p->size_b;
-	d = (c == 'a') ? 1 : -1;
-	index = -1;
-	while (s.size--)
-		if (s.tab[s.size] * d < pivot * d)
-		{
-			index = s.size;
-			break ;
-		}
-	return (index);
-}
-
-static int		quick_sort_stack(t_ps *p, char c, int top, int bottom)
-{
-	t_stack	s;
-	int		pivot;
-	int		pos;
-	int		nb_pushed;
-
-	s.tab = (c == 'a') ? p->a : p->b;
-	s.size = (c == 'a') ? p->size_a : p->size_b;
-	if (top - bottom <= 1 || sorted(*p, c, top, bottom))
-		return (1);
-	nb_pushed = 0;
-	pivot = find_median(s.tab[top], s.tab[bottom], s.tab[(top - bottom)/ 2]);
-	while ((pos = find_target(p, c, pivot)) != -1)
-	{
-		goto_pos(p, pos, c); 
-		if (c == 'a')
-			push(p, 'b');
-		else
+		if (p->size_a > 1)
+			rotate(p, 'a');
+		while (p->size_b)
 			push(p, 'a');
-		++nb_pushed;
 	}
-	pos = find_pos(p, pivot, c);
-	goto_pos(p, pos, c);
-	while (nb_pushed--)
-		push(p, c);
-	quick_sort_stack(p, c, top, pos + 1);
-	quick_sort_stack(p, c, pos - 1, bottom);
 	return (1);
-}	
+}
+
+static int		go_back(t_ps *p, int pivot, int p_index)
+{
+	int		(*f)(t_ps *, char c);
+	int		rot;
+	int		rev;
+
+	push_back(p);
+	rot = 0;
+	rev = 0;
+	while (get_val(p, p_index - rot, 'a') != pivot
+			&& (get_val(p, p_index + rev, 'a') != pivot))
+	{
+		++rot;
+		++rev;
+	}
+	f = get_val(p, p_index + rev, 'a') ? rev_rotate : rotate;
+	while (p->a[p_index] != pivot)
+		f(p, 'a');
+	return (p_index);
+}
+
+static int		partition(t_ps *p, int top, int bottom)
+{
+	int		pivot;
+	int		p_index;
+
+	if (sorted(*p, 'a', top, bottom))
+		return (bottom);
+	pivot = p->a[bottom];
+	p_index = bottom;
+	goto_pos(p, top, 'a');
+	bottom += p->size_a - 1 - top;
+	top = p->size_a - 1;
+	while (top > bottom)
+	{
+		while (p->a[top] > pivot)
+		{
+			push(p, 'b');
+			++p_index;
+			--top;
+		}
+		while (p->a[top] < pivot)
+			--top;
+		goto_pos(p, top, 'a');
+		bottom += p->size_a - 1 - top;
+		top = p->size_a - 1;
+	}
+	return (go_back(p, pivot, p_index));
+}
 
 int				quick_sort(t_ps *p, int top, int bottom)
 {
-	int		pivot;
-	int		pos;
+	int		p_index;
 
-	pivot = find_median(p->a[top], p->a[bottom], p->a[top / 2]);
-	while ((pos = find_target(p, 'a', pivot)) != -1)
-	{
-		goto_pos(p, pos, 'a'); 
-		push(p, 'b');
-	}
-	if (p->size_a <= 3)
-		mini_sort(p, 'a');
-	else
-		quick_sort_stack(p, 'a', p->size_a - 1, 0); 
-	if (p->size_b <= 3)
-		mini_sort(p, 'b');
-	else
-		quick_sort_stack(p, 'b', p->size_b - 1, 0); 
-	while (p->size_b)
-			push(p, 'a');
+	if (top < 0 || bottom < 0 || top >= p->size_a || bottom >= p->size_a)
+		return (1);
+	if (top < bottom)
+		return (1);
+	if (sorted(*p, 0, 0, 0))
+		return (1);
+	p_index = partition(p, top, bottom);
+	quick_sort(p, top, p_index + 1);
+	quick_sort(p, p_index - 1, bottom);
 	return (1);
 }

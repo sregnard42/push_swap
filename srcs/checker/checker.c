@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/30 15:24:00 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:52:22 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			main(int ac, char **av)
 	char	*line;
 
 	parse_args(&p, ac, av);
+	if (p.size_a < 1)
+			exit(EXIT_SUCCESS);
 	if (p.flags & FLAG_DISPLAY)
 		print_stacks(p, "Init A and B", SLP_SHORT);
 	while (get_next_line(0, &line))
