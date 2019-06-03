@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:34:12 by sregnard          #+#    #+#             */
-/*   Updated: 2019/04/07 10:33:14 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:25:08 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,34 @@ static int		go_back(t_ps *p, int pivot, int p_index)
 	return (p_index);
 }
 
+static int		find_median(t_ps *p, int top, int bottom)
+{
+	int		pivot;
+	int		p_index;
+	int		i;
+	int		cpt;
+
+	p_index = top;
+	while (p_index > bottom)
+	{
+		cpt = 0;
+		pivot = p->a[p_index];
+		i = top;
+		while (i > bottom)
+		{
+			if (pivot > p->a[i])
+				++cpt;
+			if (pivot < p->a[i])
+				--cpt;
+			--i;
+		}
+		if (cpt == 0 || cpt == 1)
+			break ;
+		--p_index;
+	}
+	return (p_index);
+}
+
 static int		partition(t_ps *p, int top, int bottom)
 {
 	int		pivot;
@@ -52,8 +80,11 @@ static int		partition(t_ps *p, int top, int bottom)
 
 	if (sorted(*p, 'a', top, bottom))
 		return (bottom);
-	pivot = p->a[bottom];
-	p_index = bottom;
+	p_index = find_median(p, top, bottom);
+	pivot = p->a[p_index];
+	print_stacks(*p, 0, 0);
+	ft_printf("top = %d,\t bottom = %d,\tp_index = %d,\tpivot = %d\n",
+			top, bottom, p_index, pivot);
 	goto_pos(p, top, 'a');
 	bottom += p->size_a - 1 - top;
 	top = p->size_a - 1;
@@ -70,6 +101,7 @@ static int		partition(t_ps *p, int top, int bottom)
 		goto_pos(p, top, 'a');
 		bottom += p->size_a - 1 - top;
 		top = p->size_a - 1;
+	ft_printf("bitch\n");
 	}
 	return (go_back(p, pivot, p_index));
 }
