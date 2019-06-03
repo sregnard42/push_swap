@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/03 15:29:29 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/03 15:58:57 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,48 +43,33 @@ static int	find_target(t_ps *p, int top, int *code)
 	int	max;
 
 	min = find_min(p, 'a');
-	if (*code == 1)
-	{
-		*code = 0;
-		return (min);
-	}
 	max = find_max(p, 'a');
-	if (*code == 2)
+	if (*code == 1 || *code == 1 || *code == 2)
 	{
 		*code = 0;
-		return (max);
+		return (find_closest(top, min, max));
 	}
 	min = find_closest(top, min, find_min(p, 'a'));
 	max = find_closest(top, max, find_max(p, 'a'));
 	target = find_closest(top, min, max);
-	target == find_min(p, 'a') ? *code = 1 : 0;
-	target == find_max(p, 'a') ? *code = 2 : 0;
+	if (target == find_min(p, 'a'))
+		*code = 1;
+	else if (target == find_max(p, 'a'))
+		*code = 2;
+	else
+		*code = 0;
 	return (target);
 }
 
 static int	push_all(t_ps *p, int top, int code)
 {
-	/*
-	int	max;
-	int	min;
-	int	dmin;
-	int	dmax;
-
-	if (!p->size_a)
-		return (1);
-	max = find_max(p, 'a');
-	min = find_min(p, 'a');
-	dmin = min + 1 < top - min ? min + 1 : top - min;
-	dmax = max + 1 < top - max ? max + 1 : top - max;
-	dmax < dmin ? goto_pos(p, max, 'a') : goto_pos(p, min, 'a');
-	*/
 	int	target;
 
 	if (!p->size_a)
 		return (1);
 	target = find_target(p, top, &code);
 	goto_pos(p, target, 'a');
-	insert_nb(p, p->a[target]);
+	insert_nb(p, p->a[0]);
 	return (push_all(p, --top, code));
 }
 
