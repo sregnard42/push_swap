@@ -6,88 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:41:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/30 13:34:53 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:49:07 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
- ** Find the max value that is inferior to the given value
- */
-
-static int find_max_capped(t_ps *p, char c, int cap)
-{
-		int i;
-		int max;
-		int pos;
-		int size;
-		int *tab;
-
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size;
-		max = cap;
-		pos = -1;
-		while (i--)
-				if ((max < tab[i] || max == cap)
-								&& tab[i] < cap)
-				{
-						max = tab[i];
-						pos = i;
-				}
-		return (pos);
-}
-
-static int find_max(t_ps *p, char c)
-{
-		int i;
-		int max;
-		int pos;
-		int size;
-		int *tab;
-
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size - 1;
-		max = tab[i];
-		pos = i;
-		while (i--)
-				if (max < tab[i])
-				{
-						max = tab[i];
-						pos = i;
-				}
-		return (pos);
-}
-
-static int find_min(t_ps *p, char c)
-{
-		int i;
-		int min;
-		int pos;
-		int size;
-		int *tab;
-
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size - 1;
-		min = tab[i];
-		pos = i;
-		while (i--)
-				if (min > tab[i])
-				{
-						min = tab[i];
-						pos = i;
-				}
-		return (pos);
-}
 
 static int insert_nb(t_ps *p, int nb)
 {
@@ -111,8 +34,8 @@ static int insert_nb(t_ps *p, int nb)
 }
 
 /* 
- **	Use only if p->size_a > 3
- */
+**	Use only if p->size_a > 3 && p->size_a <= 6
+*/
 
 int insertion_sort(t_ps *p)
 {
