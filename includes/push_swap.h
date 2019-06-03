@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/30 14:02:58 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/03 15:28:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ int				get_val(t_ps *p, int pos, char c);
 int				goto_pos(t_ps *p, int pos, char c);
 t_rotf			rotate_function(t_ps *p, int pos, char c);
 int				sorted(t_ps p, char c, int top, int bottom);
+
+/*
+**				min_max.c
+*/
+
+int				find_min(t_ps *p, char c);
+int				find_max(t_ps *p, char c);
+int				find_min_capped(t_ps *p, char c, int cap);
+int				find_max_capped(t_ps *p, char c, int cap);
+int				find_closest(int top, int tar1, int tar2);
 
 /*
 **				operations.c
