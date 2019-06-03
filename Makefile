@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/05/28 14:40:25 by sregnard         ###   ########.fr        #
+#    Updated: 2019/06/03 13:42:03 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,15 @@ DEPENDENCIES			=	push_swap.h
 SRCDIR					=	srcs/
 OBJDIR					=	objs/
 
-SRCNAME					=	parsing.c \
+SRCNAME					=	swap.c \
+							push.c \
+							rotate.c \
+							rev_rotate.c \
+							parsing.c \
 							utils.c \
 							display.c \
 							operations.c \
-							swap.c \
-							push.c \
-							rotate.c \
-							rev_rotate.c
+							min_max.c
 SRC						:=	$(addprefix $(SRCDIR), $(SRCNAME))
 OBJ						=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 
@@ -91,3 +92,7 @@ fclean					:	clean
 	make fclean -C $(LIBDIR)
 
 re						:	fclean	all
+
+ps						:
+	rm -rf objs/
+	make
