@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/03 15:58:57 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/04 13:14:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,58 @@ static int insert_nb(t_ps *p, int nb)
 }
 
 /*
-**	target = min_1 => *code = 1 => force target on min_0 next call
-**	target = max_1 => *code = 2 => force target on max_0 next call
+**	target = min_1 => FLAG_MIN => force target on min_0 next call
+**	target = max_1 => FLAG_MAX => force target on max_0 next call
 */
 
-static int	find_target(t_ps *p, int top, int *code)
+static int	find_target(t_ps *p, int top)
 {
 	int target;
-	int	min;
-	int	max;
+	int	min[3];
+	int	max[3];
 
-	min = find_min(p, 'a');
-	max = find_max(p, 'a');
-	if (*code == 1 || *code == 1 || *code == 2)
-	{
-		*code = 0;
-		return (find_closest(top, min, max));
-	}
-	min = find_closest(top, min, find_min(p, 'a'));
-	max = find_closest(top, max, find_max(p, 'a'));
-	target = find_closest(top, min, max);
-	if (target == find_min(p, 'a'))
-		*code = 1;
-	else if (target == find_max(p, 'a'))
-		*code = 2;
-	else
-		*code = 0;
+	min[0] = find_min(p, 'a');
+	max[0] = find_max(p, 'a');
+	min[1] = find_min_capped(p, 'a', min[0]);
+	max[1] = find_max_capped(p, 'a', max[0]);
+	min[2] = (p->flags |= FLAG_MIN  || min[1] == -1) ? min[0]
+			: find_closest(top, min[0], min[1]);
+	max[2] = (p->flags |= FLAG_MAX  || max[1] == -1) ? max[0]
+			: find_closest(top, max[0], max[1]);
+	target = find_closest(top, min[2], max[2]);
+	if (target == min[0])
+			p->flags &= ~FLAG_MIN;
+	else if (target == max[0])
+			p->flags &= ~FLAG_MIN;
+	else if (target == min[1])
+			p->flags |= FLAG_MIN;
+	else if (target == max[1])
+			p->flags |= FLAG_MAX;
+	/*
+	ft_printf("______________________________\n");
+	for (int i = 0; i < 3; i++)
+		ft_printf("min[%d] = %d\nmax[%d] = %d\n", i, min[i], i, max[i]);
+	ft_printf("target = %d\n", target);
+	ft_printf("______________________________\n");
+	*/
 	return (target);
 }
 
-static int	push_all(t_ps *p, int top, int code)
+static int	push_all(t_ps *p, int top)
 {
 	int	target;
 
 	if (!p->size_a)
 		return (1);
-	target = find_target(p, top, &code);
+	target = find_target(p, top);
 	goto_pos(p, target, 'a');
 	insert_nb(p, p->a[0]);
-	return (push_all(p, --top, code));
+	return (push_all(p, --top));
 }
 
 int			selection_sort(t_ps *p)
 {
-	push_all(p, p->size_a - 1, 0);
+	push_all(p, p->size_a - 1);
 	mini_sort(p, 'a');
 	while (p->size_b && push(p, 'a'))
 		;

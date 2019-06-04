@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:23:48 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/03 15:26:51 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/04 13:10:32 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,10 @@ int	find_closest(int top, int tar1, int tar2)
 	int	target;
 	int	d[2];
 
+	if (tar1 < 0)
+			return (tar2);
+	if (tar2 < 0)
+			return (tar1);
 	d[0] = tar1 + 1 < top - tar1 ? tar1 + 1 : top - tar1;
 	d[1] = tar2 + 1 < top - tar2 ? tar2 + 1 : top - tar2;
 	target = d[0] < d[1] ? tar1 : tar2;
