@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/03 15:28:51 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/04 11:01:31 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ enum			e_flags
 	FLAG_DISPLAY = (1 << 0),
 	FLAG_COLOR = (1 << 1),
 	FLAG_SOLVER = (1 << 2),
+	FLAG_MIN = (1 << 3),
+	FLAG_MAX = (1 << 4),
 };
 
 typedef int		(*t_rotf)(t_ps *, char);
