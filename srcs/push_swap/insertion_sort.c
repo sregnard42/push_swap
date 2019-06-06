@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:41:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/03 13:49:07 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:50:14 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int insert_nb(t_ps *p, int nb)
 }
 
 /* 
-**	Use only if p->size_a > 3 && p->size_a <= 6
+**	Use only if p->size_a >= 4 && p->size_a <= 6
 */
 
 int insertion_sort(t_ps *p)

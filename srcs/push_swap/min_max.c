@@ -5,14 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 13:57:47 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/31 13:58:13 by sregnard         ###   ########.fr       */
+/*   Created: 2019/06/03 13:23:48 by sregnard          #+#    #+#             */
+/*   Updated: 2019/06/04 13:10:32 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int find_max_capped(t_ps *p, char c, int cap)
+/*
+** Find the biggest number
+** While being inferior to the given value
+** Returns index of -1 if none exists
+*/
+
+int find_max_capped(t_ps *p, char c, int cap)
 {
 		int i;
 		int max;
@@ -37,7 +43,11 @@ static int find_max_capped(t_ps *p, char c, int cap)
 		return (pos);
 }
 
-static int find_max(t_ps *p, char c)
+/*
+** Find the biggest number
+*/
+
+int find_max(t_ps *p, char c)
 {
 		int i;
 		int max;
@@ -61,7 +71,41 @@ static int find_max(t_ps *p, char c)
 		return (pos);
 }
 
-static int find_min(t_ps *p, char c)
+/*
+** Find the smallest number
+** While being superior to the given value
+** Returns index of -1 if none exists
+*/
+
+int find_min_capped(t_ps *p, char c, int cap)
+{
+		int i;
+		int min;
+		int pos;
+		int size;
+		int *tab;
+
+		size = c == 'a' ? p->size_a : p->size_b;
+		tab = c == 'a' ? p->a : p->b;
+		if (size == 0)
+				return (-1);
+		i = size;
+		min = cap;
+		pos = -1;
+		while (i--)
+				if ((min > tab[i] || min == cap)
+								&& tab[i] > cap)
+				{
+						min = tab[i];
+						pos = i;
+				}
+		return (pos);
+}
+/*
+** Find the smallest number
+*/
+
+int find_min(t_ps *p, char c)
 {
 		int i;
 		int min;
@@ -83,4 +127,24 @@ static int find_min(t_ps *p, char c)
 						pos = i;
 				}
 		return (pos);
+}
+
+/*
+**	Compare two indexes and return the closest one
+**	(The one that will use the smaller number of (rev)rotate)
+*/
+
+int	find_closest(int top, int tar1, int tar2)
+{
+	int	target;
+	int	d[2];
+
+	if (tar1 < 0)
+			return (tar2);
+	if (tar2 < 0)
+			return (tar1);
+	d[0] = tar1 + 1 < top - tar1 ? tar1 + 1 : top - tar1;
+	d[1] = tar2 + 1 < top - tar2 ? tar2 + 1 : top - tar2;
+	target = d[0] < d[1] ? tar1 : tar2;
+	return (target);
 }
