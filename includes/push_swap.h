@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/04 11:01:31 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:24:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ int				add_operation(char **operations, char *new_op);
 char			**opti_operations(char *operations);
 
 /*
+**				sort.c
+*/
+
+int				*sort_tab(int *tab, int size);
+
+/*
 **				Allowed operations
 */
 
@@ -107,6 +113,7 @@ int				rev_rotate(t_ps *p, char c);
 int				mini_sort(t_ps *p, char c);
 int				selection_sort(t_ps *p);
 int				insertion_sort(t_ps *p);
-int				quick_sort(t_ps *p, int top, int bottom);
+int				inselection_sort(t_ps *p);
+//int				quick_sort(t_ps *p, int top, int bottom);
 
 #endif
