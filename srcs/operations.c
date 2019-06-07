@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/07 11:55:16 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:52:31 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,29 @@ int			add_operation(char **operations, char *new_op)
 
 static int	opti_swap(char **op_a, char **op_b, char *a, char *b)
 {
-		if (a[1] == 'a' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'b')
+		if ((a[1] == 'a' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'b')
+						|| (a[1] == 'b' && b[0] == 'r'
+								&& b[ft_strlen(b) - 1] == 'a'))
 				return (1);
-		if (a[1] == 'b' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'a')
-				return (1);
-		if ((a[1] == 'a' && ft_strequ(b, "sb"))
-						|| (a[1] == 'b' && ft_strequ(b, "sa")))
+		if ((ft_strequ(a, "sa") && ft_strequ(b, "sb"))
+			   || (ft_strequ(a, "sa") && ft_strequ(b, "sb")))
 		{
 				ft_strcpy(b, "ss");
 				ft_remove_elem_tab(op_a);
 				return (0);
 		}
+		if (ft_strequ(a, "ss"))
+		{
+				if (ft_strequ(b, "sa"))
+						ft_strcpy(b, "sb");
+				else if (ft_strequ(b, "sb"))
+						ft_strcpy(b, "sa");
+				ft_remove_elem_tab(op_a);
+				return (0);
+		}
 		if ((a[1] == 'a' && ft_strequ(b, "sa"))
-						|| (a[1] == 'b' && ft_strequ(b, "sb")))
+						|| (a[1] == 'b' && ft_strequ(b, "sb"))
+						|| (a[1] == 's' && ft_strequ(b, "ss")))
 		{
 				ft_remove_elem_tab(op_b);
 				ft_remove_elem_tab(op_a);
@@ -44,12 +54,25 @@ static int	opti_swap(char **op_a, char **op_b, char *a, char *b)
 
 static int	opti_rotate(char **op_a, char **op_b, char *a, char *b)
 {
-		if (b[0] == 'p')
-				return (-1);
+		if (a[1] == 'a' && (ft_strequ(b, "ra") || ft_strequ(b, "rr")
+								|| ft_strequ(b, "sb")))
+				return (1);
+		if (a[1] == 'b' && (ft_strequ(b, "rb") || ft_strequ(b, "rr")
+								|| ft_strequ(b, "sa")))
+				return (1);
 		if ((a[1] == 'a' && ft_strequ(b, "rb"))
 						|| (a[1] == 'b' && ft_strequ(b, "ra")))
 		{
 				ft_strcpy(b, "rr");
+				ft_remove_elem_tab(op_a);
+				return (0);
+		}
+		if (ft_strequ(a, "rr"))
+		{
+				if (ft_strequ(b, "rra"))
+						ft_strcpy(b, "rb");
+				else if (ft_strequ(b, "rrb"))
+						ft_strcpy(b, "ra");
 				ft_remove_elem_tab(op_a);
 				return (0);
 		}
@@ -60,28 +83,34 @@ static int	opti_rotate(char **op_a, char **op_b, char *a, char *b)
 				ft_remove_elem_tab(op_a);
 				return (0);
 		}
-		return (1);
+		return (0);
 }
 
 static int	opti_rev_rotate(char **op_a, char **op_b, char *a, char *b)
 {
-		if (b[0] == 'p')
-				return (-1);
-		if ((a[1] == 'a' && ft_strequ(b, "rrb"))
-						|| (a[1] == 'b' && ft_strequ(b, "rra")))
+		if (a[2] == 'a' && (ft_strequ(b, "rra") || ft_strequ(b, "rrr")))
+				return (1);
+		if (a[2] == 'a' && ft_strequ(b, "sb"))
+				return (1);
+		if (a[2] == 'b' && (ft_strequ(b, "rrb") || ft_strequ(b, "rrr")))
+				return (1);
+		if (a[2] == 'b' && ft_strequ(b, "sa"))
+				return (1);
+		if ((a[2] == 'a' && ft_strequ(b, "rrb"))
+						|| (a[2] == 'b' && ft_strequ(b, "rra")))
 		{
 				ft_strcpy(b, "rrr");
 				ft_remove_elem_tab(op_a);
 				return (0);
 		}
-		if ((a[1] == 'a' && ft_strequ(b, "ra"))
-						|| (a[1] == 'b' && ft_strequ(b, "rb")))
+		if ((a[2] == 'a' && ft_strequ(b, "ra"))
+						|| (a[2] == 'b' && ft_strequ(b, "rb")))
 		{
 				ft_remove_elem_tab(op_b);
 				ft_remove_elem_tab(op_a);
 				return (0);
 		}
-		return (1);
+		return (0);
 }
 
 static int	opti_op(char **op)
@@ -116,7 +145,7 @@ char		**opti_operations(char *operations)
 		char	**op;
 		int		i;
 
-		if (!(ft_strlen(operations) && (op = ft_strsplit(operations, '\n'))))
+		if(!(ft_strlen(operations) && (op = ft_strsplit(operations, '\n'))))
 				return (NULL);
 		if (ft_nb_str_tab(op) < 2)
 				return (op);
