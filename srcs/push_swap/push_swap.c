@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/06 14:24:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:11:29 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(int ac, char **av)
 		inselection_sort(&p);
 		//quick_sort(&p, p.size_a - 1, 0);
 	ft_print_tab(opti_operations(p.operations));
+//	ft_putendl(p.operations);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/17 21:36:54 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:55:16 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,69 @@ int			add_operation(char **operations, char *new_op)
 		return (1);
 }
 
-static int	next(char *op_a, char *op_b)
+static int	opti_swap(char **op_a, char **op_b, char *a, char *b)
 {
-		if (!(op_a && *op_a && op_b && *op_b))
+		if (a[1] == 'a' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'b')
+				return (1);
+		if (a[1] == 'b' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'a')
+				return (1);
+		if ((a[1] == 'a' && ft_strequ(b, "sb"))
+						|| (a[1] == 'b' && ft_strequ(b, "sa")))
+		{
+				ft_strcpy(b, "ss");
+				ft_remove_elem_tab(op_a);
 				return (0);
-		if (ft_strequ(op_b, "pa") || ft_strequ(op_b, "pb"))
+		}
+		if ((a[1] == 'a' && ft_strequ(b, "sa"))
+						|| (a[1] == 'b' && ft_strequ(b, "sb")))
+		{
+				ft_remove_elem_tab(op_b);
+				ft_remove_elem_tab(op_a);
 				return (0);
-		if (ft_strequ(op_a, "sa") || ft_strequ(op_b, "sa"))
-				if (ft_strequ(op_a, "sb") || ft_strequ(op_b, "sb"))
-						return (2);
-		if (ft_strequ(op_a, "ra") || ft_strequ(op_b, "ra"))
-				if (ft_strequ(op_a, "rb") || ft_strequ(op_b, "rb"))
-						return (3);
-		if (ft_strequ(op_a, "rra") || ft_strequ(op_b, "rra"))
-				if (ft_strequ(op_a, "rrb") || ft_strequ(op_b, "rrb"))
-						return (4);
+		}
+		return (0);
+}
+
+static int	opti_rotate(char **op_a, char **op_b, char *a, char *b)
+{
+		if (b[0] == 'p')
+				return (-1);
+		if ((a[1] == 'a' && ft_strequ(b, "rb"))
+						|| (a[1] == 'b' && ft_strequ(b, "ra")))
+		{
+				ft_strcpy(b, "rr");
+				ft_remove_elem_tab(op_a);
+				return (0);
+		}
+		if ((a[1] == 'a' && ft_strequ(b, "rra"))
+						|| (a[1] == 'b' && ft_strequ(b, "rrb")))
+		{
+				ft_remove_elem_tab(op_b);
+				ft_remove_elem_tab(op_a);
+				return (0);
+		}
 		return (1);
 }
 
-static int	cancel(char *op_a, char *op_b)
+static int	opti_rev_rotate(char **op_a, char **op_b, char *a, char *b)
 {
-		if (!(op_a && *op_a && op_b && *op_b))
+		if (b[0] == 'p')
+				return (-1);
+		if ((a[1] == 'a' && ft_strequ(b, "rrb"))
+						|| (a[1] == 'b' && ft_strequ(b, "rra")))
+		{
+				ft_strcpy(b, "rrr");
+				ft_remove_elem_tab(op_a);
 				return (0);
-		if (ft_strequ(op_b, "pa") || ft_strequ(op_b, "pb"))
+		}
+		if ((a[1] == 'a' && ft_strequ(b, "ra"))
+						|| (a[1] == 'b' && ft_strequ(b, "rb")))
+		{
+				ft_remove_elem_tab(op_b);
+				ft_remove_elem_tab(op_a);
 				return (0);
-		if (ft_strequ(op_a, "rra") || ft_strequ(op_b, "rra"))
-				if (ft_strequ(op_a, "ra") || ft_strequ(op_b, "ra"))
-						return (1);
-		if (ft_strequ(op_a, "rrb") || ft_strequ(op_b, "rrb"))
-				if (ft_strequ(op_a, "rb") || ft_strequ(op_b, "rb"))
-						return (1);
-		if (ft_strequ(op_a, "sa") && ft_strequ(op_b, "sa"))
-				return (1);
-		if (ft_strequ(op_a, "sb") && ft_strequ(op_b, "sb"))
-				return (1);
-		return (0);
+		}
+		return (1);
 }
 
 static int	opti_op(char **op)
@@ -61,24 +89,25 @@ static int	opti_op(char **op)
 		char	*op_a;
 		char	*op_b;
 		int		ret;
+		int		i;
 
-		if (ft_strequ(*op, "pa") || ft_strequ(*op, "pb"))
-				return (0);
+		i = 0;
+		ret = 1;
 		op_a = *(op - 1);
-		op_b = *op;
-		if (cancel(op_a, op_b))
+		while (op + i && op[i] && ret)
 		{
-				ft_remove_elem_tab(op - 1);
-				ft_remove_elem_tab(op - 1);
-				return (1);
+				op_b = *(op + i);
+				if (op_a[0] == 's')
+						ret = opti_swap(op - 1, op + i, op_a, op_b);
+				else if (ft_strlen(op_a) == 2 && op_a[0] == 'r')
+						ret = opti_rotate(op - 1, op + i, op_a, op_b);
+				else if (ft_strlen(op_a) == 3 && op_a[0] == 'r')
+						ret = opti_rev_rotate(op - 1, op + i, op_a, op_b);
+				else
+						ret = -1;
+				if (ret)
+						++i;
 		}
-		ret = next(op_a, op_b);
-		if (ret == 0 || ret == 1)
-				return (0);
-		ft_remove_elem_tab(op);
-		ret == 2 ? ft_strcpy(op_a, "ss") : 0;
-		ret == 3 ? ft_strcpy(op_a, "rr") : 0;
-		ret == 4 ? ft_strcpy(op_a, "rrr") : 0;
 		return (1);
 }
 
@@ -87,21 +116,12 @@ char		**opti_operations(char *operations)
 		char	**op;
 		int		i;
 
-		if (!ft_strlen(operations))
-				return (NULL);
-		if (!(op = ft_strsplit(operations, '\n')))
+		if (!(ft_strlen(operations) && (op = ft_strsplit(operations, '\n'))))
 				return (NULL);
 		if (ft_nb_str_tab(op) < 2)
 				return (op);
 		i = 1;
 		while (op + i && op[i])
 				opti_op(op + i++);
-		i = 0;
-		while (op + i && op[i])
-		{
-				if (!ft_strlen(op[i]))
-						op[i] = op[i];
-				i++;
-		}
 		return (op);
 }
