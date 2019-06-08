@@ -6,151 +6,133 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/07 15:52:31 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/08 15:42:45 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			add_operation(char **operations, char *new_op)
+static int	opt_rotate(char *op, char c)
 {
-		*operations = ft_stradd(*operations, new_op);
-		*operations = ft_stradd(*operations, "\n");
-		return (1);
-}
-
-static int	opti_swap(char **op_a, char **op_b, char *a, char *b)
-{
-		if ((a[1] == 'a' && b[0] == 'r' && b[ft_strlen(b) - 1] == 'b')
-						|| (a[1] == 'b' && b[0] == 'r'
-								&& b[ft_strlen(b) - 1] == 'a'))
-				return (1);
-		if ((ft_strequ(a, "sa") && ft_strequ(b, "sb"))
-			   || (ft_strequ(a, "sa") && ft_strequ(b, "sb")))
+		//	ft_printf("%s & r%c\n", op, c);
+		if (c == 'a')
 		{
-				ft_strcpy(b, "ss");
-				ft_remove_elem_tab(op_a);
-				return (0);
+				if (ft_strequ(op, "ra"))
+						return (0);
+				if (ft_strequ(op, "rb"))
+				{
+						ft_strcpy(op, "rr");
+						return (1);
+				}
+				if (ft_strequ(op, "rr"))
+						return (0);
+				if (ft_strequ(op, "rra"))
+						return (2);
+				if (ft_strequ(op, "rrb"))
+						return (-1);
+				if (ft_strequ(op, "rrr"))
+				{
+						ft_strcpy(op, "rb");
+						return (1);
+				}
 		}
-		if (ft_strequ(a, "ss"))
+		if (c == 'b')
 		{
-				if (ft_strequ(b, "sa"))
-						ft_strcpy(b, "sb");
-				else if (ft_strequ(b, "sb"))
-						ft_strcpy(b, "sa");
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
-		if ((a[1] == 'a' && ft_strequ(b, "sa"))
-						|| (a[1] == 'b' && ft_strequ(b, "sb"))
-						|| (a[1] == 's' && ft_strequ(b, "ss")))
-		{
-				ft_remove_elem_tab(op_b);
-				ft_remove_elem_tab(op_a);
-				return (0);
+				/*
+				if (ft_strequ(op, "rb"))
+						return (0);
+				if (ft_strequ(op, "ra"))
+				{
+						ft_strcpy(op, "rr");
+						return (1);
+				}
+				if (ft_strequ(op, "rr"))
+						return (0);
+				if (ft_strequ(op, "rrb"))
+						return (2);
+				if (ft_strequ(op, "rra"))
+						return (-1);
+				if (ft_strequ(op, "rrr"))
+				{
+						ft_strcpy(op, "ra");
+						return (1);
+				}
+				*/
 		}
 		return (0);
 }
 
-static int	opti_rotate(char **op_a, char **op_b, char *a, char *b)
+/*
+ **			return value > 0 : stop add
+ **			return value <= 0 : continue add
+ */
+
+static int	opt_rev_rotate(char *op, char c)
 {
-		if (a[1] == 'a' && (ft_strequ(b, "ra") || ft_strequ(b, "rr")
-								|| ft_strequ(b, "sb")))
-				return (1);
-		if (a[1] == 'b' && (ft_strequ(b, "rb") || ft_strequ(b, "rr")
-								|| ft_strequ(b, "sa")))
-				return (1);
-		if ((a[1] == 'a' && ft_strequ(b, "rb"))
-						|| (a[1] == 'b' && ft_strequ(b, "ra")))
-		{
-				ft_strcpy(b, "rr");
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
-		if (ft_strequ(a, "rr"))
-		{
-				if (ft_strequ(b, "rra"))
-						ft_strcpy(b, "rb");
-				else if (ft_strequ(b, "rrb"))
-						ft_strcpy(b, "ra");
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
-		if ((a[1] == 'a' && ft_strequ(b, "rra"))
-						|| (a[1] == 'b' && ft_strequ(b, "rrb")))
-		{
-				ft_remove_elem_tab(op_b);
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
+		//	ft_printf("%s & rr%c\n", op, c);
+		op += 0;
+		c += 0;
 		return (0);
 }
 
-static int	opti_rev_rotate(char **op_a, char **op_b, char *a, char *b)
-{
-		if (a[2] == 'a' && (ft_strequ(b, "rra") || ft_strequ(b, "rrr")))
-				return (1);
-		if (a[2] == 'a' && ft_strequ(b, "sb"))
-				return (1);
-		if (a[2] == 'b' && (ft_strequ(b, "rrb") || ft_strequ(b, "rrr")))
-				return (1);
-		if (a[2] == 'b' && ft_strequ(b, "sa"))
-				return (1);
-		if ((a[2] == 'a' && ft_strequ(b, "rrb"))
-						|| (a[2] == 'b' && ft_strequ(b, "rra")))
-		{
-				ft_strcpy(b, "rrr");
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
-		if ((a[2] == 'a' && ft_strequ(b, "ra"))
-						|| (a[2] == 'b' && ft_strequ(b, "rb")))
-		{
-				ft_remove_elem_tab(op_b);
-				ft_remove_elem_tab(op_a);
-				return (0);
-		}
-		return (0);
-}
+/*
+ **			return value > 0 : stop add
+ **			return value <= 0 : continue add
+ */
 
-static int	opti_op(char **op)
+static int	opt_operation(t_ps *p, char *new_op)
 {
-		char	*op_a;
-		char	*op_b;
+		t_list	*operation;
+		char	*op;
 		int		ret;
-		int		i;
 
-		i = 0;
-		ret = 1;
-		op_a = *(op - 1);
-		while (op + i && op[i] && ret)
+		ret = 0;
+		operation = p->operation_last;
+		while (operation && !ret)
 		{
-				op_b = *(op + i);
-				if (op_a[0] == 's')
-						ret = opti_swap(op - 1, op + i, op_a, op_b);
-				else if (ft_strlen(op_a) == 2 && op_a[0] == 'r')
-						ret = opti_rotate(op - 1, op + i, op_a, op_b);
-				else if (ft_strlen(op_a) == 3 && op_a[0] == 'r')
-						ret = opti_rev_rotate(op - 1, op + i, op_a, op_b);
-				else
-						ret = -1;
-				if (ret)
-						++i;
+				op = operation->content;
+				if (op[0] == 'p' || new_op[0] == 'p')
+						return (0);
+				if (new_op[0] == 's')
+						return (0);
+				if (ft_strequ(new_op, "ra") || ft_strequ(new_op, "rb"))
+						ret = (opt_rotate(op, new_op[1]));
+				if (ft_strequ(new_op, "rra") || ft_strequ(new_op, "rrb"))
+						ret = (opt_rev_rotate(op, new_op[2]));
+				if (!ret)
+					operation = operation->prev;
+				//		ft_printf("ret = %d\n\n", ret);
 		}
+		if (ret == 2)
+		{
+				if (p->operation_first == operation)
+						p->operation_first = operation->next;
+				ft_lstdelone(&operation, &del_operation);
+		}
+		return (ret);
+}
+
+int			add_operation(t_ps *p, char *new_op)
+{
+		t_list	*operation;
+
+		if (p->operation_first && opt_operation(p, new_op))
+				return (1);
+		operation = ft_lstnew(new_op, sizeof(char *));
+		!operation ? trigger_error("Error malloc node\n") : 0;
+		if (!p->operation_first)
+		{
+				p->operation_first = operation;
+				p->operation_last = operation;
+				return (1);
+		}
+		ft_lstadd(&p->operation_last, operation);
+		p->operation_last = p->operation_last->next;
 		return (1);
 }
 
-char		**opti_operations(char *operations)
+void	del_operation(void **content, size_t content_size)
 {
-		char	**op;
-		int		i;
-
-		if(!(ft_strlen(operations) && (op = ft_strsplit(operations, '\n'))))
-				return (NULL);
-		if (ft_nb_str_tab(op) < 2)
-				return (op);
-		i = 1;
-		while (op + i && op[i])
-				opti_op(op + i++);
-		return (op);
+		content_size += 0;
+		ft_memdel(content);
 }

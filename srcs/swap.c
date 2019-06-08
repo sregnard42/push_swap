@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:34:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:31:01 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/08 11:16:04 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int			swap(t_ps *p, char c)
 		cmd = "ss";
 		ret = swap_a(p) && swap_b(p);
 	}
-	p->flags & FLAG_SOLVER ? add_operation(&p->operations, cmd) : 0;
+	p->flags & FLAG_SOLVER ? add_operation(p, cmd) : 0;
 	return (ret);
 }

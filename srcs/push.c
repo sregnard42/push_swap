@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:44:26 by sregnard          #+#    #+#             */
-/*   Updated: 2019/05/28 19:30:26 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/08 11:15:13 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int			push(t_ps *p, char c)
 		cmd = "pb";
 		ret = push_b(p);
 	}
-	p->flags & FLAG_SOLVER ? add_operation(&p->operations, cmd) : 0;
+	p->flags & FLAG_SOLVER ? add_operation(p, cmd) : 0;
 	return (ret);
 }
