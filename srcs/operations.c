@@ -6,117 +6,86 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/08 15:42:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/09 15:01:02 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	opt_rotate(char *op, char c)
-{
-		//	ft_printf("%s & r%c\n", op, c);
-		if (c == 'a')
-		{
-				if (ft_strequ(op, "ra"))
-						return (0);
-				if (ft_strequ(op, "rb"))
-				{
-						ft_strcpy(op, "rr");
-						return (1);
-				}
-				if (ft_strequ(op, "rr"))
-						return (0);
-				if (ft_strequ(op, "rra"))
-						return (2);
-				if (ft_strequ(op, "rrb"))
-						return (-1);
-				if (ft_strequ(op, "rrr"))
-				{
-						ft_strcpy(op, "rb");
-						return (1);
-				}
-		}
-		if (c == 'b')
-		{
-				/*
-				if (ft_strequ(op, "rb"))
-						return (0);
-				if (ft_strequ(op, "ra"))
-				{
-						ft_strcpy(op, "rr");
-						return (1);
-				}
-				if (ft_strequ(op, "rr"))
-						return (0);
-				if (ft_strequ(op, "rrb"))
-						return (2);
-				if (ft_strequ(op, "rra"))
-						return (-1);
-				if (ft_strequ(op, "rrr"))
-				{
-						ft_strcpy(op, "ra");
-						return (1);
-				}
-				*/
-		}
-		return (0);
-}
-
 /*
- **			return value > 0 : stop add
- **			return value <= 0 : continue add
- */
+**		Returns 1 if optimization successful
+*/
 
-static int	opt_rev_rotate(char *op, char c)
-{
-		//	ft_printf("%s & rr%c\n", op, c);
-		op += 0;
-		c += 0;
-		return (0);
-}
-
-/*
- **			return value > 0 : stop add
- **			return value <= 0 : continue add
- */
-
-static int	opt_operation(t_ps *p, char *new_op)
+static int	opt_rev_rotate(t_ps *p)
 {
 		t_list	*operation;
 		char	*op;
-		int		ret;
 
-		ret = 0;
 		operation = p->operation_last;
-		while (operation && !ret)
+		while (operation)
 		{
 				op = operation->content;
-				if (op[0] == 'p' || new_op[0] == 'p')
+				if (ft_strlen(op) == 2)
 						return (0);
-				if (new_op[0] == 's')
-						return (0);
-				if (ft_strequ(new_op, "ra") || ft_strequ(new_op, "rb"))
-						ret = (opt_rotate(op, new_op[1]));
-				if (ft_strequ(new_op, "rra") || ft_strequ(new_op, "rrb"))
-						ret = (opt_rev_rotate(op, new_op[2]));
-				if (!ret)
-					operation = operation->prev;
-				//		ft_printf("ret = %d\n\n", ret);
+				if (ft_strequ(op, "rra"))
+				{
+						ft_strcpy(op, "rrr");
+						return (1);
+				}
+				operation = operation->prev;
 		}
-		if (ret == 2)
+		return (0);
+}
+
+/*
+**		Returns 1 if optimization successful
+*/
+
+static int	opt_rotate(t_ps *p)
+{
+		t_list	*operation;
+		char	*op;
+
+		operation = p->operation_last;
+		while (operation)
 		{
-				if (p->operation_first == operation)
-						p->operation_first = operation->next;
-				ft_lstdelone(&operation, &del_operation);
+				op = operation->content;
+				if (ft_strlen(op) == 3)
+						return (0);
+				if (op[0] == 'p' || op[0] == 's')
+						return (0);
+				if (ft_strequ(op, "ra"))
+				{
+						ft_strcpy(op, "rr");
+						return (1);
+				}
+				operation = operation->prev;
 		}
-		return (ret);
+		return (0);
+}
+
+/*
+**		Returns 1 if optimization successful
+*/
+
+static int	opt_operation(t_ps *p, char *op)
+{
+		if (!p->operation_first || !p->operation_last)
+				return (0);
+		if (op[0] != 'r')
+				return (0);
+		if (ft_strequ(op, "rb"))
+				return (opt_rotate(p));
+		if (ft_strequ(op, "rrb"))
+				return (opt_rev_rotate(p));
+		return (0);
 }
 
 int			add_operation(t_ps *p, char *new_op)
 {
 		t_list	*operation;
 
-		if (p->operation_first && opt_operation(p, new_op))
+		if (opt_operation(p, new_op))
 				return (1);
 		operation = ft_lstnew(new_op, sizeof(char *));
 		!operation ? trigger_error("Error malloc node\n") : 0;
