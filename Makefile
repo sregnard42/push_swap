@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/06/08 15:31:58 by sregnard         ###   ########.fr        #
+#    Updated: 2019/06/09 11:31:13 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,8 @@ OBJDIR_PUSH				=	$(OBJDIR)$(DIR_PUSH)
 
 SRCNAME					=	push_swap.c \
 							mini_sort.c \
-							selection_sort.c \
 							insertion_sort.c \
-							inselection_sort.c \
-							quick_sort.c \
+							select_insert_sort.c \
 							min_max.c \
 							sort.c
 SRC_PUSH				:=	$(addprefix $(SRCDIR_PUSH), $(SRCNAME))
@@ -61,9 +59,9 @@ OBJ_PUSH				=	$(SRC_PUSH:$(SRCDIR_PUSH)%.c=$(OBJDIR_PUSH)%.o)
 
 CC						=	gcc	
 CFLAGS					=	-Wall -Wextra -Werror
-CFLAGS					+= -g3
 
 all						:	$(LIBFT) $(CHECKER) $(PUSH_SWAP)
+	@make -C $(LIBDIR)
 
 $(LIBFT)				:
 	@make -C $(LIBDIR)
