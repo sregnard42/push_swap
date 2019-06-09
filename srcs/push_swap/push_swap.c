@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/08 12:28:56 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/09 11:27:57 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 	else if (p.size_a <= 6)
 		insertion_sort(&p);
 	else
-		inselection_sort(&p);
+		select_insert_sort(&p);
 	operation = p.operation_first;
 	while (operation)
 	{

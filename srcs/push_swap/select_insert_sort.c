@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inselection_sort.c                                 :+:      :+:    :+:   */
+/*   select_insert_sort.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/09 11:28:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int insert_nb(t_ps *p, int nb)
 		return (1);
 }
 
-static int	find_target(t_ps *p, int top, int seg[5][2])
+static int	find_target(t_ps *p, int top, int **seg, int nb_seg)
 {
 		static int	s_index = 0;
 		int			left;
@@ -53,45 +53,56 @@ static int	find_target(t_ps *p, int top, int seg[5][2])
 				++i;
 		}	
 		++s_index;
-		if (s_index < 5)
-			return (find_target(p, top, seg));
+		if (s_index < nb_seg)
+			return (find_target(p, top, seg, nb_seg));
 		return (-1);
 }
 
-static int	push_all(t_ps *p, int top, int seg[5][2])
+static int	push_all(t_ps *p, int top, int **seg, int nb_seg)
 {
 		int			target;
 
 		if (!p->size_a)
 				return (1);
-		target = find_target(p, top, seg);
+		target = find_target(p, top, seg, nb_seg);
 		goto_pos(p, target, 'a');
 		insert_nb(p, p->a[top]);
-		return (push_all(p, --top, seg));
+		return (push_all(p, --top, seg, nb_seg));
 }
 
-static int	segments(int *tab, int size, int seg[5][2])
+static int	**segments(int *tab, int size, int nb_seg)
 {
+		int		**seg;
 		int		i;
 
+		seg = (int **)malloc(sizeof(int *) * nb_seg);
 		i = 0;
-		while (i < 5)
+		while (i < nb_seg)
 		{
-				seg[i][0] = tab[(int)(size * 0.2 * i)];
-				seg[i][1] = tab[(int)(size * 0.2 * (i + 1) - 1)];
+				seg[i] = (int *)malloc(sizeof(int) * 2);
+				seg[i][0] = tab[(int)(size * (1 / (float)nb_seg) * i)];
+				seg[i][1] = tab[(int)(size * (1 / (float)nb_seg) * (i + 1) - 1)];
 				++i;
 		}
-		return (1);
+		return (seg);
 }
 
-int			inselection_sort(t_ps *p)
+/*
+**			100 nb -> 5 segments
+**			500 nb -> 11 segments
+**			segments = (3 / 200) * nb + 3.5
+*/
+
+int			select_insert_sort(t_ps *p)
 {
 		int		*tab;
-		int		seg[5][2];
+		int		**seg;
+		int		nb_seg;
 
 		tab = sort_tab(p->a, p->size_a);
-		segments(tab, p->size_a, seg);
-		push_all(p, p->size_a - 1, seg);
+		nb_seg = (3.0 / 200) * p->size_a + 3.5;
+		seg = segments(tab, p->size_a, nb_seg);
+		push_all(p, p->size_a - 1, seg, nb_seg);
 		while (p->size_b && push(p, 'a'))
 				;
 		goto_pos(p, find_min(p, 'a'), 'a');

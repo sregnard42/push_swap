@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:39:30 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/08 14:55:40 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/09 10:38:12 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_rotf	rotate_function(t_ps *p, int pos, char c)
 	size = c == 'a' ? p->size_a : p->size_b;
 	top = size - 1;
 	val = tab[pos];
-	f = ((size / 2) / (pos + 1) < 2) ? rotate : rev_rotate;
+	f = (pos + 1) > (size - pos - 1) ? rotate : rev_rotate;
 	return (f);
 }
 
