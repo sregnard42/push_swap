@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/08 13:23:19 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/09 11:30:11 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int				find_closest(int top, int tar1, int tar2);
 
 int				add_operation(t_ps *p, char *new_op);
 void			del_operation(void **content, size_t content_size);
-//char			**opti_operations(char *operations);
 
 /*
 **				sort.c
@@ -113,8 +112,7 @@ int				rev_rotate(t_ps *p, char c);
 */
 
 int				mini_sort(t_ps *p, char c);
-int				selection_sort(t_ps *p);
 int				insertion_sort(t_ps *p);
-int				inselection_sort(t_ps *p);
+int				select_insert_sort(t_ps *p);
 
 #endif
