@@ -101,6 +101,7 @@ int find_min_capped(t_ps *p, char c, int cap)
 				}
 		return (pos);
 }
+
 /*
 ** Find the smallest number
 */
