@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/11 12:34:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:12:01 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,42 @@ void		trigger_error(char *error)
 		exit(EXIT_FAILURE);
 }
 
-void		print_stacks(t_ps p, char *s, float interval)
+static void	print_stack(t_stack *s)
 {
-		int	lines;
 		int	cols;
 
+		cols = 0;
+		while (cols < COLS_LIMIT)
+		{
+				if (s->size)
+						ft_printf("%-4d", s->tab[--s->size]);
+				else
+						ft_printf("%4s", "");
+				++cols;
+		}
+}
+
+void		print_stacks(t_ps p, char *s, float interval)
+{
+		t_stack	a;
+		t_stack	b;
+		int		lines;
+
 		lines = 0;
+		a.tab = p.a;
+		a.size = p.size_a;
+		b.tab = p.b;
+		b.size = p.size_b;
 		system("clear");
 		while (lines < LINES_LIMIT && (p.size_a || p.size_b))
 		{
-				cols = 0;
-				while (cols < COLS_LIMIT)
-				{
-						if (p.size_a)
-								ft_printf("%4d", p.a[--p.size_a]);
-						else
-								ft_printf("%4s", "");
-						++cols;
-				}
-				cols = 0;
 				ft_printf(" | ");
-				while (cols < COLS_LIMIT)
-				{
-						if (p.size_b)
-								ft_printf("%-4d", p.b[--p.size_b]);
-						else
-								ft_printf("%-4s", "");
-						++cols;
-				}
+				print_stack(&a);
+				ft_printf(" | ");
+				print_stack(&b);
+				ft_printf(" | ");
 				lines == 0 ? ft_putendl(s) : ft_putln();
 				++lines;
 		}
-		sleep(interval);
+		usleep(interval);
 }
