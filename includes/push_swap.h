@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/09 11:30:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:38:17 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define SLP_SHORT		1
 # define SLP_LONG		2
 
-# define LINES_LIMIT	42
+# define LINES_LIMIT	49
+# define COLS_LIMIT		11
 
 typedef struct	s_ps
 {
@@ -86,20 +87,15 @@ int				find_max_capped(t_ps *p, char c, int cap);
 int				find_closest(int top, int tar1, int tar2);
 
 /*
-**				operations.c
+**				Operations
 */
 
 int				add_operation(t_ps *p, char *new_op);
+int				opt_operation(t_ps *p, char *op);
 void			del_operation(void **content, size_t content_size);
 
 /*
-**				sort.c
-*/
-
-int				*sort_tab(int *tab, int size);
-
-/*
-**				Allowed operations
+**				Instructions
 */
 
 int				push(t_ps *p, char c);
@@ -111,8 +107,23 @@ int				rev_rotate(t_ps *p, char c);
 **				Sorting algorithms
 */
 
+/*
+**				Use when list size <= 3
+*/
+
 int				mini_sort(t_ps *p, char c);
+
+/*
+**				Use when list size <= 6
+*/
+
 int				insertion_sort(t_ps *p);
+
+/*
+**				Use when list size > 6
+*/
+
+int				*sort_tab(int *tab, int size);
 int				select_insert_sort(t_ps *p);
 
 #endif
