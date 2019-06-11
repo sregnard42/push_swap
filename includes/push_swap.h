@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/11 12:38:17 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:18:50 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
+# include "time.h"
 
 # define DEBUG			1
 # define ERR_DEFAULT	"Error\n"
 
 # define SLP_NONE		0
-# define SLP_SHORT		1
-# define SLP_LONG		2
+# define SLP_SHORT		0.1 * 1000000
+# define SLP_NORMAL		1 * 1000000
+# define SLP_LONG		2 * 1000000
 
-# define LINES_LIMIT	49
+# define LINES_LIMIT	46
 # define COLS_LIMIT		11
 
 typedef struct	s_ps
