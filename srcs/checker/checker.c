@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/11 13:22:41 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:07:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			main(int ac, char **av)
 	{
 		if (!(operation(&p, line)))
 				break ;
-		p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_NORMAL) : 0;
+		p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_NONE) : 0;
 		ft_memdel((void **)&line);
 	}
 	print_result(&p, sorted(p, 0, 0, 0));
