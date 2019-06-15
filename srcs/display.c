@@ -12,11 +12,12 @@
 
 #include "push_swap.h"
 
-void		trigger_error(char *error)
+void		trigger_error(t_ps *p, char *error)
 {
 		if (!error || !DEBUG)
 				error = ERR_DEFAULT;
 		write(2, error, ft_strlen(error));
+		free_all(p);
 		exit(EXIT_FAILURE);
 }
 

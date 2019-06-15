@@ -39,7 +39,7 @@ void		parse_args(t_ps *p, int ac, char **av)
 	p->a = (int *)malloc(ac * sizeof(int));
 	p->b = (int *)malloc(ac * sizeof(int));
 	if (!(p->a && p->b))
-		trigger_error("Error malloc.\n");
+		trigger_error(p, "Error malloc.\n");
 	ft_bzero(p->a, ac * sizeof(int));
 	ft_bzero(p->b, ac * sizeof(int));
 	while (ac)
@@ -49,10 +49,10 @@ void		parse_args(t_ps *p, int ac, char **av)
 		{
 			nb = ft_atoi(av[ac--]);
 			if (duplicate(*p, nb))
-				trigger_error("Duplicate number.\n");
+				trigger_error(p, "Duplicate number.\n");
 			else
 				p->a[p->size_a++] = nb;
 		}
 		else
-			trigger_error("Invalid argument.\n");
+			trigger_error(p, "Invalid argument.\n");
 }

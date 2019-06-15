@@ -19,7 +19,7 @@ int			add_operation(t_ps *p, char *new_op)
 		if (opt_operation(p, new_op))
 				return (1);
 		operation = ft_lstnew(new_op, sizeof(char *));
-		!operation ? trigger_error("Error malloc node\n") : 0;
+		!operation ? trigger_error(p, "Error malloc node\n") : 0;
 		if (!p->operation_first)
 		{
 				p->operation_first = operation;

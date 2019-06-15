@@ -56,6 +56,12 @@ enum			e_flags
 typedef int		(*t_rotf)(t_ps *, char);
 
 /*
+**				free.c
+*/
+
+void			free_all(t_ps *p);
+
+/*
 **				parsing.c
 */
 
@@ -65,7 +71,7 @@ void			parse_args(t_ps *p, int ac, char **av);
 **				display.c
 */
 
-void			trigger_error(char *error);
+void			trigger_error(t_ps *p, char *error);
 void			print_stacks(t_ps p, char *s, float interval);
 
 /*

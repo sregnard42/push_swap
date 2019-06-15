@@ -102,6 +102,7 @@ int			select_insert_sort(t_ps *p)
 		tab = sort_tab(p->a, p->size_a);
 		nb_seg = (3.0 / 200) * p->size_a + 3.5;
 		seg = segments(tab, p->size_a, nb_seg);
+		ft_memdel((void **)&tab);
 		push_all(p, p->size_a - 1, seg, nb_seg);
 		while (p->size_b && push(p, 'a'))
 				;
