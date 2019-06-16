@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 23:14:25 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/11 13:12:01 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/16 18:50:13 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		print_stacks(t_ps p, char *s, float interval)
 		b.tab = p.b;
 		b.size = p.size_b;
 		system("clear");
-		while (lines < LINES_LIMIT && (p.size_a || p.size_b))
+		while (lines < LINES_LIMIT && (a.size || b.size))
 		{
 				ft_printf(" | ");
 				print_stack(&a);
