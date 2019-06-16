@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 11:56:44 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/10 12:03:20 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/16 14:32:49 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	opt_rev_rotate(t_ps *p)
 						return (0);
 				if (ft_strequ(op, "rra"))
 				{
-						ft_strcpy(op, "rrr");
+//						ft_strcpy(op, "rrr");
+						op[2] = 'r';
 						return (1);
 				}
 				operation = operation->prev;
@@ -76,7 +77,8 @@ static int	opt_rotate(t_ps *p)
 						return (0);
 				if (ft_strequ(op, "ra"))
 				{
-						ft_strcpy(op, "rr");
+						//ft_strcpy(op, "rr");
+						op[1] = 'r';
 						return (1);
 				}
 				operation = operation->prev;
