@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:23:48 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/04 13:10:32 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:27:59 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@
 
 int find_max_capped(t_ps *p, char c, int cap)
 {
-		int i;
-		int max;
-		int pos;
-		int size;
-		int *tab;
+	int i;
+	int max;
+	int pos;
+	int size;
+	int *tab;
 
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size;
-		max = cap;
-		pos = -1;
-		while (i--)
-				if ((max < tab[i] || max == cap)
-								&& tab[i] < cap)
-				{
-						max = tab[i];
-						pos = i;
-				}
-		return (pos);
+	size = c == 'a' ? p->size_a : p->size_b;
+	tab = c == 'a' ? p->a : p->b;
+	if (size == 0)
+		return (-1);
+	i = size;
+	max = cap;
+	pos = -1;
+	while (i--)
+		if ((max < tab[i] || max == cap)
+				&& tab[i] < cap)
+		{
+			max = tab[i];
+			pos = i;
+		}
+	return (pos);
 }
 
 /*
@@ -49,26 +49,26 @@ int find_max_capped(t_ps *p, char c, int cap)
 
 int find_max(t_ps *p, char c)
 {
-		int i;
-		int max;
-		int pos;
-		int size;
-		int *tab;
+	int i;
+	int max;
+	int pos;
+	int size;
+	int *tab;
 
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size - 1;
-		max = tab[i];
-		pos = i;
-		while (i--)
-				if (max < tab[i])
-				{
-						max = tab[i];
-						pos = i;
-				}
-		return (pos);
+	size = c == 'a' ? p->size_a : p->size_b;
+	tab = c == 'a' ? p->a : p->b;
+	if (size == 0)
+		return (-1);
+	i = size - 1;
+	max = tab[i];
+	pos = i;
+	while (i--)
+		if (max < tab[i])
+		{
+			max = tab[i];
+			pos = i;
+		}
+	return (pos);
 }
 
 /*
@@ -79,27 +79,27 @@ int find_max(t_ps *p, char c)
 
 int find_min_capped(t_ps *p, char c, int cap)
 {
-		int i;
-		int min;
-		int pos;
-		int size;
-		int *tab;
+	int i;
+	int min;
+	int pos;
+	int size;
+	int *tab;
 
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size;
-		min = cap;
-		pos = -1;
-		while (i--)
-				if ((min > tab[i] || min == cap)
-								&& tab[i] > cap)
-				{
-						min = tab[i];
-						pos = i;
-				}
-		return (pos);
+	size = c == 'a' ? p->size_a : p->size_b;
+	tab = c == 'a' ? p->a : p->b;
+	if (size == 0)
+		return (-1);
+	i = size;
+	min = cap;
+	pos = -1;
+	while (i--)
+		if ((min > tab[i] || min == cap)
+				&& tab[i] > cap)
+		{
+			min = tab[i];
+			pos = i;
+		}
+	return (pos);
 }
 
 /*
@@ -108,26 +108,26 @@ int find_min_capped(t_ps *p, char c, int cap)
 
 int find_min(t_ps *p, char c)
 {
-		int i;
-		int min;
-		int pos;
-		int size;
-		int *tab;
+	int i;
+	int min;
+	int pos;
+	int size;
+	int *tab;
 
-		size = c == 'a' ? p->size_a : p->size_b;
-		tab = c == 'a' ? p->a : p->b;
-		if (size == 0)
-				return (-1);
-		i = size - 1;
-		min = tab[i];
-		pos = i;
-		while (i--)
-				if (min > tab[i])
-				{
-						min = tab[i];
-						pos = i;
-				}
-		return (pos);
+	size = c == 'a' ? p->size_a : p->size_b;
+	tab = c == 'a' ? p->a : p->b;
+	if (size == 0)
+		return (-1);
+	i = size - 1;
+	min = tab[i];
+	pos = i;
+	while (i--)
+		if (min > tab[i])
+		{
+			min = tab[i];
+			pos = i;
+		}
+	return (pos);
 }
 
 /*
@@ -141,9 +141,9 @@ int	find_closest(int top, int tar1, int tar2)
 	int	d[2];
 
 	if (tar1 < 0)
-			return (tar2);
+		return (tar2);
 	if (tar2 < 0)
-			return (tar1);
+		return (tar1);
 	d[0] = tar1 + 1 < top - tar1 ? tar1 + 1 : top - tar1;
 	d[1] = tar2 + 1 < top - tar2 ? tar2 + 1 : top - tar2;
 	target = d[0] < d[1] ? tar1 : tar2;
