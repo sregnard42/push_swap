@@ -6,13 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 12:51:39 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/18 13:29:03 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:14:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			add_operation(t_ps *p, char *new_op)
+int		add_operation(t_ps *p, char *new_op)
 {
 	t_list	*operation;
 

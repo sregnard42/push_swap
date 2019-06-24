@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 13:23:48 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/18 13:27:59 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:15:18 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Returns index of -1 if none exists
 */
 
-int find_max_capped(t_ps *p, char c, int cap)
+int	find_max_capped(t_ps *p, char c, int cap)
 {
 	int i;
 	int max;
@@ -47,7 +47,7 @@ int find_max_capped(t_ps *p, char c, int cap)
 ** Find the biggest number
 */
 
-int find_max(t_ps *p, char c)
+int	find_max(t_ps *p, char c)
 {
 	int i;
 	int max;
@@ -77,7 +77,7 @@ int find_max(t_ps *p, char c)
 ** Returns index of -1 if none exists
 */
 
-int find_min_capped(t_ps *p, char c, int cap)
+int	find_min_capped(t_ps *p, char c, int cap)
 {
 	int i;
 	int min;
@@ -106,7 +106,7 @@ int find_min_capped(t_ps *p, char c, int cap)
 ** Find the smallest number
 */
 
-int find_min(t_ps *p, char c)
+int	find_min(t_ps *p, char c)
 {
 	int i;
 	int min;

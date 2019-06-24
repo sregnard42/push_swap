@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/15 17:07:15 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:05:04 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	print_result(t_ps *p, int ok)
 {
 	if (p->flags & FLAG_COLOR)
 		ok ? ft_putendl("\033[32mOK\033[0m")
-		: ft_putendl("\033[31mKO\033[0m");
+			: ft_putendl("\033[31mKO\033[0m");
 	else
 		ok ? ft_putendl("OK") : ft_putendl("KO");
 	ft_memdel((void **)&p->a);
@@ -53,13 +53,13 @@ int			main(int ac, char **av)
 
 	parse_args(&p, ac, av);
 	if (p.size_a < 1)
-			exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	if (p.flags & FLAG_DISPLAY)
 		print_stacks(p, "Init", SLP_SHORT);
 	while (get_next_line(0, &line))
 	{
 		if (!(operation(&p, line)))
-				break ;
+			break ;
 		p.flags & FLAG_DISPLAY ? print_stacks(p, line, SLP_NONE) : 0;
 		ft_memdel((void **)&line);
 	}
