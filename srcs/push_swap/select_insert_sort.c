@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/24 12:14:00 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/25 12:50:50 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,8 @@ int			select_insert_sort(t_ps *p)
 	while (p->size_b && push(p, 'a'))
 		;
 	goto_pos(p, find_min(p, 'a'), 'a');
+	while (nb_seg--)
+		ft_memdel((void **)&seg[nb_seg]);
+	ft_memdel((void **)seg);
 	return (1);
 }

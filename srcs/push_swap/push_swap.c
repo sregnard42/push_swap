@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/09 11:27:57 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:14:09 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int	main(int ac, char **av)
 	else
 		select_insert_sort(&p);
 	operation = p.operation_first;
-	while (operation)
+	while (p.operation_first)
 	{
 		ft_putendl((char *)operation->content);
 		operation = operation->next;
 	}
-	exit(EXIT_SUCCESS);
+	return (1);
+//	exit(EXIT_SUCCESS);
 }

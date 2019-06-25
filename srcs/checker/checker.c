@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/24 12:05:04 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/25 12:54:33 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int			main(int ac, char **av)
 		ft_memdel((void **)&line);
 	}
 	print_result(&p, sorted(p, 0, 0, 0));
-	exit(EXIT_SUCCESS);
+	return (1);
+	//exit(EXIT_SUCCESS);
 }
