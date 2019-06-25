@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 11:25:34 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/25 12:50:50 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:17:38 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int			select_insert_sort(t_ps *p)
 	int		*tab;
 	int		**seg;
 	int		nb_seg;
+	int		i;
 
 	tab = sort_tab(p->a, p->size_a);
 	nb_seg = (3.0 / 200) * p->size_a + 3.5;
@@ -107,8 +108,9 @@ int			select_insert_sort(t_ps *p)
 	while (p->size_b && push(p, 'a'))
 		;
 	goto_pos(p, find_min(p, 'a'), 'a');
-	while (nb_seg--)
-		ft_memdel((void **)&seg[nb_seg]);
-	ft_memdel((void **)seg);
+	i = 0;
+	while (i < nb_seg)
+		free(seg[i++]);
+	free(seg);
 	return (1);
 }
