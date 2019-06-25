@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/06/15 17:18:13 by sregnard         ###   ########.fr        #
+#    Updated: 2019/06/25 14:27:35 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ CC						=	gcc
 CFLAGS					=	-Wall -Wextra -Werror
 
 all						:	$(LIBFT) $(CHECKER) $(PUSH_SWAP)
-	@make -C $(LIBDIR)
 
 $(LIBFT)				:
 	@make -C $(LIBDIR)
