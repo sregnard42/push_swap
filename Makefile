@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/06/25 14:27:35 by sregnard         ###   ########.fr        #
+#    Updated: 2019/06/26 18:40:09 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADDIR					=	includes/
 HEADERS					=	-I $(HEADDIR)
 HEADERS					+=	-I $(LIBDIR)$(HEADDIR)
 
-DEPENDENCIES			=	push_swap.h
+DEPENDENCIES			=	$(HEADDIR)push_swap.h
 
 SRCDIR					=	srcs/
 OBJDIR					=	objs/
@@ -73,11 +73,11 @@ $(CHECKER)				:	$(LIBFT) $(OBJ_CHECK) $(OBJ)
 $(PUSH_SWAP)			:	$(LIBFT) $(OBJ_PUSH) $(OBJ)
 	$(CC) $(CFLAGS) $(HEADERS) $(LIBFT) -o $@ $(OBJ) $(OBJ_PUSH)
 
-$(OBJDIR_CHECK)%.o		:	$(SRCDIR_CHECK)%.c
+$(OBJDIR_CHECK)%.o		:	$(SRCDIR_CHECK)%.c $(DEPENDENCIES)
 	@mkdir -p $(OBJDIR_CHECK);
 	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
 
-$(OBJDIR_PUSH)%.o		:	$(SRCDIR_PUSH)%.c
+$(OBJDIR_PUSH)%.o		:	$(SRCDIR_PUSH)%.c $(DEPENDENCIES)
 	@mkdir -p $(OBJDIR_PUSH);
 	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
 

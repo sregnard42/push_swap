@@ -1,4 +1,5 @@
 *.swp
+*.dSYM
 *.o
 *.a
 /checker
