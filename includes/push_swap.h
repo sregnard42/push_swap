@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 21:46:27 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/11 13:18:50 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:35:35 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "time.h"
 
-# define DEBUG			1
+# define DEBUG			0
 # define ERR_DEFAULT	"Error\n"
 
 # define SLP_NONE		0
