@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/26 17:34:02 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/26 18:35:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			main(int ac, char **av)
 		exit(EXIT_SUCCESS);
 	if (p.flags & FLAG_DISPLAY)
 		print_stacks(p, "Init", SLP_SHORT);
-	while (get_next_line(0, &line) == 1)
+	while (get_next_line(0, &line))
 	{
 		if (!(operation(&p, line)))
 		{
@@ -69,5 +69,4 @@ int			main(int ac, char **av)
 	ft_memdel((void **)&line);
 	print_result(&p, sorted(p, 0, 0, 0));
 	return (1);
-//	exit(EXIT_SUCCESS);
 }
