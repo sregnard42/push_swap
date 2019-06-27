@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:37:09 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/26 18:35:53 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:17:13 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,16 @@ int			main(int ac, char **av)
 {
 	t_ps	p;
 	char	*line;
+	int		ret;
 
 	parse_args(&p, ac, av);
 	if (p.size_a < 1)
 		exit(EXIT_SUCCESS);
 	if (p.flags & FLAG_DISPLAY)
 		print_stacks(p, "Init", SLP_SHORT);
-	while (get_next_line(0, &line))
+	while ((ret = get_next_line_custom(0, &line)))
 	{
-		if (!(operation(&p, line)))
+		if (ret == 2 || !(operation(&p, line)))
 		{
 			ft_memdel((void **)&line);
 			trigger_error(&p, 0);
