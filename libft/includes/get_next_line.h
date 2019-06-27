@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 15:08:48 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/26 18:41:41 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:15:16 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include "libft.h"
 
 int	get_next_line(int fd, char **line);
+int	get_next_line_custom(int fd, char **line);
 
 #endif
