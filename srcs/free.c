@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 17:16:32 by sregnard          #+#    #+#             */
-/*   Updated: 2019/06/24 12:14:23 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/07/07 11:37:21 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	free_all(t_ps *p)
 {
 	ft_memdel((void**)&p->a);
-	ft_memdel((void**)&p->a);
+	ft_memdel((void**)&p->b);
 	ft_lstdel(&p->operation_first, del_operation);
 }
